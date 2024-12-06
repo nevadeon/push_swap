@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/06 15:49:59 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/06 18:04:42 by ndavenne         ###   ########.fr       */
+/*   Created: 2024/12/06 17:26:16 by ndavenne          #+#    #+#             */
+/*   Updated: 2024/12/06 18:01:29 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main(int argc, char const *argv[])
+void	parse_args(argc, argv)
 {
-	t_ps	list;
+	if (argc < 2)
+		ft_error(ERR_USAGE);
 
-
-	parse_args(argc, argv);
-
-	return (0);
 }
