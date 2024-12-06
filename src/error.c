@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/06 15:46:46 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/06 17:57:16 by ndavenne         ###   ########.fr       */
+/*   Created: 2024/12/06 17:48:44 by ndavenne          #+#    #+#             */
+/*   Updated: 2024/12/06 18:01:31 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "push_swap.h"
 
-# include "libndav.h"
-
-typedef enum e_error
+const char	*get_error_message(t_error error_code)
 {
-	ERR_OK,
-	ERR_USAGE
-}	t_error;
+	static const char	*message[] = {\
+		[ERR_OK] = "The impossible happened",\
+		[ERR_USAGE] = "usage: push_swap int1 int2... | push_swap \"int1 int2\""
+	};
 
-typedef struct s_ps
+	return (message[error_code]);
+}
+
+void	ft_error(t_error error_code)
 {
-	int			number;
-	struct s_ps	*prev;
-	struct s_ps	*next;
-}	t_ps;
-
-void	ft_error(t_error error_code);
-
-#endif
+	ft_dputstr(STDERR_FILENO, get_error_message(error_code));
+	ft_free_arena();
+	exit(error_code);
+}
