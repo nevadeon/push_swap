@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:48:44 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/07 12:07:56 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/07 12:13:36 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,7 @@ const char	*get_error_message(t_error error_code)
 {
 	static const char	*message[] = {\
 		[ERR_OK] = "The impossible happened", \
-		[ERR_USAGE] = "Usage: push_swap int1 int2... "
-			"or push_swap \"int1 int2...\"", \
-		[ERR_EMPTY] = "Strings musn't be empty", \
-		[ERR_INVALID_STRING] = "Argument contains non digit caracter", \
+		[ERROR] = "Error", \
 		[ERR_MAX] = "Ft_error was called with out of bound index"
 	};
 

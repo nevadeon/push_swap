@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:49:59 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/06 18:04:42 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/07 12:14:45 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 int	main(int argc, char const *argv[])
 {
-	t_ps	list;
+	t_list	ps;
 
-
-	parse_args(argc, argv);
-
+	check_args(argc, argv);
 	return (0);
 }
