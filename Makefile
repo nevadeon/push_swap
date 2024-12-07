@@ -49,7 +49,7 @@ all: $(NAME)
 
 $(NAME): $(LIB_DIR)/$(LIB) msg_comp $(OBJ)
 	@$(CC) $(CFLAGS) -o $@ $(OBJ) $(LDFLAGS)
-	@printf "$(GREEN)✔ Pipex created.\n$(RESET)"
+	@printf "$(GREEN)✔ $(NAME) created.\n$(RESET)"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
@@ -97,12 +97,12 @@ libtest:
 # ============================================================================ #
 
 msg_comp:
-	@printf "$(YELLOW)Compiling pipex... [$(CFLAGS)]\n$(RESET)"
+	@printf "$(YELLOW)Compiling $(NAME)... [$(CFLAGS)]\n$(RESET)"
 
 msg_clean:
 	@printf "$(YELLOW)Removing object files...\n$(RESET)"
 
 msg_fclean:
-	@printf "$(YELLOW)Removing pipex...\n$(RESET)"
+	@printf "$(YELLOW)Removing $(NAME)...\n$(RESET)"
 
 .PHONY: all clean fclean lclean re val gdb libtest msg_comp msg_clean msg_fclean
