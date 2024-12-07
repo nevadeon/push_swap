@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:24:54 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/11/25 14:56:13 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/07 14:28:08 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ size_t	ft_dputstr(int fd, const char *s);
 size_t	ft_dputptr(int fd, void *p);
 size_t	ft_dputlbase(int fd, long n, char *base);
 size_t	ft_dputulbase(int fd, t_ulong ul, char *base);
-void	ft_dputendl(int fd, char *s);
+void	ft_dputendl(int fd, const char *s);
 void	ft_dputnbr(int fd, int n);
 
 # ifndef GNL_BUFFER_SIZE

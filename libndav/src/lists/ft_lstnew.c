@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndavenne <github@noedavenne.aleaas.coms    +#+  +:+       +#+        */
+/*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 14:33:44 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/10/27 00:23:58 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/07 14:28:17 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

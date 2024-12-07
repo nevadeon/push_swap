@@ -6,16 +6,30 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:49:59 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/07 12:14:45 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/07 15:49:45 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main(int argc, char const *argv[])
+void	printlist(t_list *list)
 {
-	t_list	ps;
+	while (list != NULL)
+	{
+		printf("%d\n", *((int *)list->content));
+		list = list->next;
+	}
+}
+
+int	main(int argc, char *argv[])
+{
+	t_list	*a;
+	t_list	*b;
 
 	check_args(argc, argv);
+	a = parsing(argc, argv);
+	check_duplicates(a);
+	b = NULL;
+	printlist(a);
 	return (0);
 }

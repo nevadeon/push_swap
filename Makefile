@@ -39,7 +39,7 @@ OBJ := $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 LIB := libndav.a
 
 # Test
-TEST_ARGUMENTS :=
+TEST_ARGUMENTS := 1 10 12
 
 # ============================================================================ #
 #        Compilation rules                                                     #

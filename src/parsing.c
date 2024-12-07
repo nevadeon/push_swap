@@ -6,37 +6,50 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:26:16 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/07 12:14:22 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/07 15:49:37 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-bool	check_digit_string(const char *str)
+t_list	*list_from_tab(char	**tab)
 {
-	int	i;
+	t_list	*list;
+	int		*n;
+	int		i;
 
+	list = NULL;
 	i = 0;
-	while (str[i] != '\0')
+	while (tab[i] != NULL)
 	{
-		if (ft_isdigit(str[i]) == false && str[i] != ' ')
-			return (false);
+		n = malloc(sizeof(int *));
+		*n = ft_atoi(tab[i]);
+		ft_lstadd_back(&list, ft_lstnew(n));
 		i++;
 	}
-	return (true);
+	return (list);
 }
 
-void	check_args(int argc, char *argv[])
+t_list	*list_from_args(int argc, char *argv[])
 {
-	int	i;
+	t_list	*list;
+	int		*n;
 
-	if (argc < 2 || (argc == 2 && argv[1][0] == '\0'))
-		ft_error(ERROR);
-	i = 1;
-	while (i < argc)
+	list = NULL;
+	while (argc > 1)
 	{
-		if (check_digit_string(argv[i]) == false)
-			ft_error(ERROR);
-		i++;
+		n = malloc(sizeof(int *));
+		*n = ft_atoi(argv[argc - 1]);
+		ft_lstadd_front(&list, ft_lstnew(n));
+		argc--;
 	}
+	return (list);
+}
+
+t_list	*parsing(int argc, char *argv[])
+{
+	if (argc == 2)
+		return (list_from_tab(ft_split(argv[1], ' ')));
+	else
+		return (list_from_args(argc, argv));
 }
