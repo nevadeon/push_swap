@@ -6,11 +6,11 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 12:06:29 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/09 12:22:01 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/09 15:59:22 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "test_push_swap.h"
 
 int main()
 {

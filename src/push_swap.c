@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:49:59 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/09 14:46:54 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/09 15:56:35 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,8 @@ int	ft_push_swap(int argc, char *argv[])
 	a = parsing(argc, argv);
 	check_duplicates(a);
 	b = NULL;
-	ft_swap(&b);
-	ft_push(&a, &b);
-	ft_swap(&b);
 	printlist(a, 'a');
-	printlist(b, 'b');
+	ft_swap(&a);
+	printlist(a, 'a');
 	return (0);
 }
