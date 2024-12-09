@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:46:46 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/09 18:30:52 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/09 18:59:14 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ void	parsing(int argc, char *argv[], t_stack *a, t_stack *b);
 void	init_stacks(int argc, char *argv[], t_stack *a, t_stack *b);
 
 void	ft_push(t_stack *src, t_stack *dest);
-void	ft_swap(t_list **stack);
-void	ft_rotate(t_list **stack);
-void	ft_reverse_rotate(t_list **stack);
+void	ft_swap(t_list **list);
+void	ft_rotate(t_list **list);
+void	ft_reverse_rotate(t_list **list);
 
 int		ft_find_max(t_list *list);
 int		ft_find_min(t_list *list);

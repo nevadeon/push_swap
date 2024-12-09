@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:26:16 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/09 18:31:34 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/09 19:08:02 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,24 @@ t_list	*list_from_args(int argc, char *argv[])
 
 void	init_stacks(int argc, char *argv[], t_stack *a, t_stack *b)
 {
+	t_list	*a_list;
+
+	if (argc == 2)
+		a_list = list_from_tab(ft_split(argv[1], ' '));
+	else
+		a_list = list_from_args(argc, argv);
+	*a = (t_stack){
+		.list = a_list,
+		.len = ft_lstsize(a_list),
+		.max = ft_find_max(a_list),
+		.min = ft_find_min(a_list)
+	};
 	*b = (t_stack){
 		.list = NULL,
 		.len = 0,
 		.max = INT32_MIN,
 		.min = INT32_MAX
 	};
-	if (argc == 2)
-		a->list = list_from_tab(ft_split(argv[1], ' '));
-	else
-		a->list = list_from_args(argc, argv);
-	a->len = ft_lstsize(a->list);
-	a->max = ft_find_max(a->list);
-	a->min = ft_find_min(a->list);
 }
 
 void	parsing(int argc, char *argv[], t_stack *a, t_stack *b)
