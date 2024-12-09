@@ -6,15 +6,14 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:49:59 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/09 15:56:35 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/09 18:00:23 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	printlist(t_list *list, char name)
+void	printlist(t_list *list)
 {
-	printf("list %c :\n", name);
 	while (list != NULL)
 	{
 		printf("%d\n", *((int *)list->content));
@@ -23,17 +22,27 @@ void	printlist(t_list *list, char name)
 	printf("----\n");
 }
 
+void	turk(t_stack *a, t_stack *b)
+{
+	printf("list a: len %d max %d min %d\n", a->len, a->max, a->min);
+	printlist(a->list);
+	printf("list b: len %d max %d min %d\n", b->len, b->max, b->min);
+	printlist(b->list);
+	ft_push(a, b);
+	ft_push(a, b);
+	printf("list a: len %d max %d min %d\n", a->len, a->max, a->min);
+	printlist(a->list);
+	printf("list b: len %d max %d min %d\n", b->len, b->max, b->min);
+	printlist(b->list);
+}
+
 int	ft_push_swap(int argc, char *argv[])
 {
-	t_list	*a;
-	t_list	*b;
+	t_stack	a;
+	t_stack	b;
 
-	check_args(argc, argv);
-	a = parsing(argc, argv);
-	check_duplicates(a);
-	b = NULL;
-	printlist(a, 'a');
-	ft_swap(&a);
-	printlist(a, 'a');
+	parsing(argc, argv, &a, &b);
+	turk(&a, &b);
+	ft_free_arena();
 	return (0);
 }

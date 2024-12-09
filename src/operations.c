@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 16:30:16 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/09 15:58:25 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/09 18:23:03 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,66 @@
 // 	(*stack)->next->content = tmp;
 // }
 
-void	ft_push(t_list **src, t_list **dest)
+void	ft_push_number(t_list **src, t_list **dest)
 {
 	t_list	*tmp;
 
-	if (*src == NULL)
-		return ;
 	tmp = *dest;
 	*dest = *src;
 	*src = (*src)->next;
 	(*dest)->next = tmp;
+}
+
+int	ft_find_max(t_list *list)
+{
+	int	current_number;
+	int	max;
+
+	max = INT32_MIN;
+	while (list != NULL)
+	{
+		current_number = *((int *)list->content);
+		if (current_number > max)
+			max = current_number;
+		list = list->next;
+	}
+	return (max);
+}
+
+int	ft_find_min(t_list *list)
+{
+	int	current_number;
+	int	min;
+
+	min = INT32_MAX;
+	while (list != NULL)
+	{
+		current_number = *((int *)list->content);
+		if (current_number < min)
+			min = current_number;
+		list = list->next;
+	}
+	return (min);
+}
+
+void	ft_push(t_stack *src, t_stack *dest)
+{
+	int	pushed_number;
+
+	if (src->list == NULL)
+		return ;
+	ft_push_number(&src->list, &dest->list);
+	pushed_number = *((int *)dest->list->content);
+	if (pushed_number > dest->max)
+		dest->max = pushed_number;
+	if (pushed_number < dest->min)
+		dest->min = pushed_number;
+	if (pushed_number == src->max)
+		src->max = ft_find_max(src->list);
+	if (pushed_number == src->min)
+		src->min = ft_find_min(src->list);
+	dest->len++;
+	src->len--;
 }
 
 void	ft_swap(t_list **stack)
