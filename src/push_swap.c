@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:49:59 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/09 18:00:23 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/09 18:33:07 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,13 @@ void	printlist(t_list *list)
 
 void	turk(t_stack *a, t_stack *b)
 {
-	printf("list a: len %d max %d min %d\n", a->len, a->max, a->min);
-	printlist(a->list);
-	printf("list b: len %d max %d min %d\n", b->len, b->max, b->min);
-	printlist(b->list);
 	ft_push(a, b);
 	ft_push(a, b);
-	printf("list a: len %d max %d min %d\n", a->len, a->max, a->min);
-	printlist(a->list);
-	printf("list b: len %d max %d min %d\n", b->len, b->max, b->min);
-	printlist(b->list);
+
+	// printf("list a: len %d max %d min %d\n", a->len, a->max, a->min);
+	// printlist(a->list);
+	// printf("list b: len %d max %d min %d\n", b->len, b->max, b->min);
+	// printlist(b->list);
 }
 
 int	ft_push_swap(int argc, char *argv[])
@@ -43,6 +40,5 @@ int	ft_push_swap(int argc, char *argv[])
 
 	parsing(argc, argv, &a, &b);
 	turk(&a, &b);
-	ft_free_arena();
 	return (0);
 }

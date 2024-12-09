@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:46:46 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/09 18:04:41 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/09 18:30:52 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	ft_error(t_error error_code);
 void	check_args(int argc, char *argv[]);
 void	check_duplicates(t_list *list);
 void	parsing(int argc, char *argv[], t_stack *a, t_stack *b);
+void	init_stacks(int argc, char *argv[], t_stack *a, t_stack *b);
 
 void	ft_push(t_stack *src, t_stack *dest);
 void	ft_swap(t_list **stack);
