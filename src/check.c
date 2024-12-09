@@ -6,13 +6,13 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:29:10 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/07 15:53:55 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/07 16:29:08 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-bool	check_digit_string(const char *str)
+bool	is_string_digits(const char *str)
 {
 	int	i;
 
@@ -35,7 +35,7 @@ void	check_args(int argc, char *argv[])
 	i = 1;
 	while (i < argc)
 	{
-		if (check_digit_string(argv[i]) == false)
+		if (is_string_digits(argv[i]) == false)
 			ft_error(ERROR);
 		i++;
 	}

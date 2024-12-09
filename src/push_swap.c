@@ -6,22 +6,24 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:49:59 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/07 15:49:45 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/09 14:46:54 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	printlist(t_list *list)
+void	printlist(t_list *list, char name)
 {
+	printf("list %c :\n", name);
 	while (list != NULL)
 	{
 		printf("%d\n", *((int *)list->content));
 		list = list->next;
 	}
+	printf("----\n");
 }
 
-int	main(int argc, char *argv[])
+int	ft_push_swap(int argc, char *argv[])
 {
 	t_list	*a;
 	t_list	*b;
@@ -30,6 +32,10 @@ int	main(int argc, char *argv[])
 	a = parsing(argc, argv);
 	check_duplicates(a);
 	b = NULL;
-	printlist(a);
+	ft_swap(&b);
+	ft_push(&a, &b);
+	ft_swap(&b);
+	printlist(a, 'a');
+	printlist(b, 'b');
 	return (0);
 }

@@ -16,6 +16,7 @@ CLEAR_LINE := \033[K
 # ============================================================================ #
 
 NAME := push_swap
+TEST_BIN := test_bin
 
 CC := cc
 
@@ -25,18 +26,25 @@ OBJ_DIR := obj
 INC_DIR := include
 LIB_DIR := libndav
 LIB_INC_DIR := include
+TEST_DIR := tests
 
 # Flags
-CFLAGS := -Wall -Werror -Wextra -I$(INC_DIR)
+CFLAGS := -Wall -Wextra -I$(INC_DIR)
 LIB_HEADER_FLAG := -I$(LIB_DIR)/$(LIB_INC_DIR)
 LDFLAGS := -L$(LIB_DIR) -lndav $(LIB_HEADER_FLAG)
 VALGRIND_FLAGS := --leak-check=full --show-leak-kinds=all
 GDB_FLAGS := --args
 
 # Sources and objects
-SRC := $(shell find $(SRC_DIR) -type f -name "*.c")
+SRC := ./src/push_swap.c ./src/parsing.c ./src/error.c ./src/check.c ./src/operations.c ./src/main.c 
 OBJ := $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 LIB := libndav.a
+
+# Test sources and objects
+TEST_SRC := ./tests/test_main.c 
+TEST_OBJ := $(patsubst $(TEST_DIR)/%.c, $(OBJ_DIR)/tests/%.o, $(TEST_SRC))
+# Exclude main program from test
+TEST_LINK_OBJ := $(filter-out $(OBJ_DIR)/$(NAME).o, $(OBJ)) $(TEST_OBJ)
 
 # Test
 TEST_ARGUMENTS := 1 10 12
@@ -78,8 +86,24 @@ lclean:
 	@make -s -C $(LIB_DIR) fclean
 
 # ============================================================================ #
+#        Test compilation rules                                                #
+# ============================================================================ #
+
+$(TEST_BIN): $(TEST_LINK_OBJ)
+	@$(CC) $(CFLAGS) -o $@ $(TEST_LINK_OBJ) $(LDFLAGS)
+	@printf "$(GREEN)✔ Binaire de test $(TEST_BIN) créé.\n$(RESET)"
+
+$(OBJ_DIR)/$(TEST_DIR)/%.o: $(TEST_DIR)/%.c
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) $(LIB_HEADER_FLAG) -c $< -o $@
+
+# ============================================================================ #
 #        Test rules                                                            #
 # ============================================================================ #
+
+test: $(TEST_BIN)
+	@printf "$(YELLOW)Lancement des tests...\n$(RESET)"
+	@./$(TEST_BIN)
 
 val: CFLAGS += -g
 val: libtest re

@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:26:16 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/07 15:49:37 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/07 16:26:42 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_list	*list_from_tab(char	**tab)
 	i = 0;
 	while (tab[i] != NULL)
 	{
-		n = malloc(sizeof(int *));
+		n = malloc(sizeof(int));
 		*n = ft_atoi(tab[i]);
 		ft_lstadd_back(&list, ft_lstnew(n));
 		i++;
@@ -38,7 +38,7 @@ t_list	*list_from_args(int argc, char *argv[])
 	list = NULL;
 	while (argc > 1)
 	{
-		n = malloc(sizeof(int *));
+		n = malloc(sizeof(int));
 		*n = ft_atoi(argv[argc - 1]);
 		ft_lstadd_front(&list, ft_lstnew(n));
 		argc--;
