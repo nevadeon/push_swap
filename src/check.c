@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:29:10 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/07 16:29:08 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/10 11:31:11 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,21 @@ void	check_args(int argc, char *argv[])
 	}
 }
 
-void	verify_number(t_list *list, int n)
+void	verify_number(t_number_list *list, int n)
 {
 	while (list != NULL)
 	{
-		if (*((int *)list->content) == n)
+		if (list->number == n)
 			ft_error(ERROR);
 		list = list->next;
 	}
 }
 
-void	check_duplicates(t_list *list)
+void	check_duplicates(t_number_list *list)
 {
 	while (list->next != NULL)
 	{
-		verify_number(list->next, *((int *)list->content));
+		verify_number(list->next, list->number);
 		list = list->next;
 	}
 }

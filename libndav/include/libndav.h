@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:24:54 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/07 14:28:08 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/10 10:37:15 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 
 typedef struct s_list
 {
-	void			*content;
 	struct s_list	*next;
+	void			*content;
 }	t_list;
 
 typedef unsigned char	t_byte;

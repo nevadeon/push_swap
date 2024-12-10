@@ -6,41 +6,51 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:26:16 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/09 19:08:02 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/10 11:48:50 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_list	*list_from_tab(char	**tab)
+t_number_list	*ft_number_list_new(int number)
 {
-	t_list	*list;
-	int		*n;
-	int		i;
+	t_number_list	*new_node;
+
+	new_node = malloc(sizeof(t_number_list));
+	if (new_node == NULL)
+		return (NULL);
+	new_node->number = number;
+	new_node->next = NULL;
+	return (new_node);
+}
+
+t_number_list	*list_from_tab(char	**tab)
+{
+	t_number_list	*list;
+	t_number_list	*new_node;
+	int				i;
 
 	list = NULL;
 	i = 0;
 	while (tab[i] != NULL)
 	{
-		n = malloc(sizeof(int));
-		*n = ft_atoi(tab[i]);
-		ft_lstadd_back(&list, ft_lstnew(n));
+		new_node = ft_number_list_new(ft_atoi(tab[i]));
+		ft_lstadd_back((t_list **)&list, (t_list *)new_node);
 		i++;
 	}
 	return (list);
 }
 
-t_list	*list_from_args(int argc, char *argv[])
+t_number_list	*list_from_args(int argc, char *argv[])
 {
-	t_list	*list;
-	int		*n;
+	t_number_list	*list;
+	t_number_list	*new_node;
 
 	list = NULL;
 	while (argc > 1)
 	{
-		n = malloc(sizeof(int));
-		*n = ft_atoi(argv[argc - 1]);
-		ft_lstadd_front(&list, ft_lstnew(n));
+		new_node = ft_number_list_new(ft_atoi(argv[argc - 1]));
+		ft_lstadd_front((t_list **)&list, (t_list *)new_node);
 		argc--;
 	}
 	return (list);
@@ -48,7 +58,7 @@ t_list	*list_from_args(int argc, char *argv[])
 
 void	init_stacks(int argc, char *argv[], t_stack *a, t_stack *b)
 {
-	t_list	*a_list;
+	t_number_list	*a_list;
 
 	if (argc == 2)
 		a_list = list_from_tab(ft_split(argv[1], ' '));
@@ -56,7 +66,7 @@ void	init_stacks(int argc, char *argv[], t_stack *a, t_stack *b)
 		a_list = list_from_args(argc, argv);
 	*a = (t_stack){
 		.list = a_list,
-		.len = ft_lstsize(a_list),
+		.len = ft_lstsize((t_list *)a_list),
 		.max = ft_find_max(a_list),
 		.min = ft_find_min(a_list)
 	};
