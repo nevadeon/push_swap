@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:49:59 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/10 15:03:51 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/10 16:06:01 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,24 +39,55 @@ void	sort_size3_stack(t_stack *stack)
 	}
 }
 
-void	turk(t_stack *a, t_stack *b)
+bool	is_ascending(int n1, int n2)
 {
-	push(a, b);
-	push(a, b);
-
-	// sort(a, reverse);
-	// sort(a, normal);
+	return (n1 < n2);
 }
 
-int	push_swap(int argc, char *argv[])
+bool	is_descending(int n1, int n2)
+{
+	return (n1 > n2);
+}
+
+bool	is_sorted(t_number_list *list, bool (*compare)(int, int))
+{
+	while (list->next != NULL)
+	{
+		if (compare(list->number, list->next->number) == false)
+			return (false);
+		list = list->next;
+	}
+	return (true);
+}
+
+void	turk(t_stack *a, t_stack *b)
+{
+	while (a->len > 3)
+	{
+		if (b->len < 2)
+			push(a, b);
+		else
+		{
+			w;
+		}
+	}
+	sort_size3_stack(a->list);
+
+}
+
+void	push_swap(int argc, char *argv[])
 {
 	t_stack	a;
 	t_stack	b;
 
 	parsing(argc, argv, &a, &b);
-	printlist(&a, "a");
-	sort_size3_stack(&a);
-	printlist(&a, "a");
-	// turk(&a, &b);
-	return (0);
+	if (is_sorted(a.list, is_ascending) == false)
+	{
+		if (a.len == 2)
+			swap(a.list);
+		else if (a.len == 3)
+			sort_size3_stack(&a);
+		else
+			turk(&a, &b);
+	}
 }

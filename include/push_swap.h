@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:46:46 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/10 15:02:51 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:41:06 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void			check_args(int argc, char *argv[]);
 void			check_duplicates(t_number_list *list);
 
 /* algo */
-int				push_swap(int argc, char *argv[]);
+void			push_swap(int argc, char *argv[]);
 
 /* operations */
 void			push(t_stack *src, t_stack *dest);
