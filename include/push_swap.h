@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:46:46 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/10 14:09:02 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/10 14:14:41 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,10 @@ void			ft_swap(t_number_list **list);
 void			ft_rotate(t_number_list **list);
 void			ft_reverse_rotate(t_number_list **list);
 
+t_list			*ft_lstprevlast(t_list *lst);
+t_number_list	*ft_number_list_new(int number);
+void			printlist(t_number_list *list, const char *name);
 int				ft_find_min(t_number_list *list);
 int				ft_find_max(t_number_list *list);
-t_number_list	*ft_number_list_new(int number);
-t_list			*ft_lstprevlast(t_list *lst);
 
 #endif

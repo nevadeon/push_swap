@@ -6,22 +6,11 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:49:59 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/10 13:48:48 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/10 14:14:59 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	printlist(t_number_list *list, const char *name)
-{
-	printf("%s -> ", name);
-	while (list != NULL)
-	{
-		printf("%2d ", list->number);
-		list = list->next;
-	}
-	printf("\n");
-}
 
 void	sort_size3_stack(t_stack *stack)
 {
