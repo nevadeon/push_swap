@@ -36,12 +36,12 @@ VALGRIND_FLAGS := --leak-check=full --show-leak-kinds=all
 GDB_FLAGS := --args
 
 # Sources and objects
-SRC := ./src/push_swap.c ./src/parsing.c ./src/error.c ./src/check.c ./src/operations.c ./src/main.c
+SRC := ./src/error.c ./src/main.c ./src/operations/push.c ./src/operations/swap.c ./src/operations/rotate.c ./src/lists_utils.c ./src/parsing/parsing.c ./src/parsing/arg_check.c ./src/algo/push_swap.c 
 OBJ := $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 LIB := libndav.a
 
 # Test sources and objects
-TEST_SRC := ./tests/test_main.c
+TEST_SRC := ./tests/test_main.c 
 TEST_OBJ := $(patsubst $(TEST_DIR)/%.c, $(OBJ_DIR)/tests/%.o, $(TEST_SRC))
 # Exclude main program from test
 TEST_LINK_OBJ := $(filter-out $(OBJ_DIR)/$(NAME).o, $(OBJ)) $(TEST_OBJ)

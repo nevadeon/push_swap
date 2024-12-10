@@ -6,23 +6,11 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:26:16 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/10 11:48:50 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/10 14:07:59 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-t_number_list	*ft_number_list_new(int number)
-{
-	t_number_list	*new_node;
-
-	new_node = malloc(sizeof(t_number_list));
-	if (new_node == NULL)
-		return (NULL);
-	new_node->number = number;
-	new_node->next = NULL;
-	return (new_node);
-}
 
 t_number_list	*list_from_tab(char	**tab)
 {
