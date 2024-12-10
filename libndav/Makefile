@@ -18,7 +18,7 @@ CLEAR_LINE := \033[K
 NAME := libndav.a
 
 CC := cc
-CFLAGS = -Wall -Werror -Wextra -Iinclude -g
+CFLAGS = -Wall -Werror -Wextra -Iinclude
 
 SRC_DIR := src
 OBJ_DIR := obj

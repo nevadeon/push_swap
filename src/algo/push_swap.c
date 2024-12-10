@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:49:59 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/10 16:06:01 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/10 22:37:02 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,19 +60,62 @@ bool	is_sorted(t_number_list *list, bool (*compare)(int, int))
 	return (true);
 }
 
+int	get_index(int value, t_number_list *list)
+{
+	int	i;
+
+	i = 0;
+	while (list != NULL)
+	{
+		if (list->number == value)
+			return (i);
+		list = list->next;
+		i++;
+	}
+	return (-1);
+}
+
+int	find_target(int reference, t_stack *dest)
+{
+	t_number_list	*list;
+	int				target;
+	bool			found;
+
+	found = false;
+	target = INT32_MIN;
+	list = dest->list;
+	while (list != NULL)
+	{
+		if (list->number < reference && list->number > target)
+		{
+			target = list->number;
+			found = true;
+		}
+		list = list->next;
+	}
+	if (found == false)
+		target = dest->max;
+	return (target);
+}
+
+// void	sort_stack(t_stack *src, t_stack *dest, bool (*compare)(int, int))
+// {
+
+// }
+
 void	turk(t_stack *a, t_stack *b)
 {
-	while (a->len > 3)
-	{
-		if (b->len < 2)
-			push(a, b);
-		else
-		{
-			w;
-		}
-	}
-	sort_size3_stack(a->list);
+	while (a->len > 3 && b->len < 2)
+		push(a, b);
+	printlist(a, "a");
+	printlist(b, "b");
 
+	// sort_stack(a, b, is_descending);
+	// sort_size3_stack(a);
+	printf("target for %d is %d\n", a->list->number, find_target(a->list->number, b));
+	printf("index is %d\n", get_index(find_target(a->list->number, b), b->list));
+
+	// sort_stack(b, a, is_ascending);
 }
 
 void	push_swap(int argc, char *argv[])
@@ -84,7 +127,7 @@ void	push_swap(int argc, char *argv[])
 	if (is_sorted(a.list, is_ascending) == false)
 	{
 		if (a.len == 2)
-			swap(a.list);
+			swap(&a.list);
 		else if (a.len == 3)
 			sort_size3_stack(&a);
 		else

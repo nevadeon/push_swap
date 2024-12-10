@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:46:46 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/10 15:41:06 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/10 22:25:14 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@ typedef enum e_error
 	ERROR,
 	ERR_MAX
 }	t_error;
+
+typedef struct s_value_index
+{
+	int	value;
+	int	index;
+}	t_value_index;
 
 typedef struct s_number_list
 {
