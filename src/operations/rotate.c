@@ -6,13 +6,13 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 13:53:55 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/10 13:55:53 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/10 14:59:47 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_rotate(t_number_list **list)
+void	rotate(t_number_list **list)
 {
 	t_number_list	*tmp;
 
@@ -24,7 +24,7 @@ void	ft_rotate(t_number_list **list)
 	tmp->next = NULL;
 }
 
-void	ft_reverse_rotate(t_number_list **list)
+void	reverse_rotate(t_number_list **list)
 {
 	t_number_list	*tmp;
 

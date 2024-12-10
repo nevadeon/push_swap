@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:26:16 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/10 14:07:59 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:03:00 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ void	init_stacks(int argc, char *argv[], t_stack *a, t_stack *b)
 	*a = (t_stack){
 		.list = a_list,
 		.len = ft_lstsize((t_list *)a_list),
-		.max = ft_find_max(a_list),
-		.min = ft_find_min(a_list)
+		.max = find_max(a_list),
+		.min = find_min(a_list)
 	};
 	*b = (t_stack){
 		.list = NULL,

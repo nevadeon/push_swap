@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:46:46 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/10 14:14:41 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:02:51 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,23 +40,28 @@ typedef struct s_stack
 	int				max;
 }	t_stack;
 
-int				ft_push_swap(int argc, char *argv[]);
-
-void			ft_error(t_error error_code);
-void			check_args(int argc, char *argv[]);
-void			check_duplicates(t_number_list *list);
+/* parsing */
 void			parsing(int argc, char *argv[], t_stack *a, t_stack *b);
 void			init_stacks(int argc, char *argv[], t_stack *a, t_stack *b);
+void			check_args(int argc, char *argv[]);
+void			check_duplicates(t_number_list *list);
 
-void			ft_push(t_stack *src, t_stack *dest);
-void			ft_swap(t_number_list **list);
-void			ft_rotate(t_number_list **list);
-void			ft_reverse_rotate(t_number_list **list);
+/* algo */
+int				push_swap(int argc, char *argv[]);
 
+/* operations */
+void			push(t_stack *src, t_stack *dest);
+void			swap(t_number_list **list);
+void			rotate(t_number_list **list);
+void			reverse_rotate(t_number_list **list);
+
+/* list utils */
 t_list			*ft_lstprevlast(t_list *lst);
 t_number_list	*ft_number_list_new(int number);
-void			printlist(t_number_list *list, const char *name);
-int				ft_find_min(t_number_list *list);
-int				ft_find_max(t_number_list *list);
+void			printlist(t_stack *stack, const char *name);
+int				find_min(t_number_list *list);
+int				find_max(t_number_list *list);
+
+void			ft_error(t_error error_code);
 
 #endif

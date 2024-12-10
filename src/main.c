@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 14:46:22 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/09 14:48:18 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:02:17 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 int main(int argc, char *argv[])
 {
-	ft_push_swap(argc, argv);
+	push_swap(argc, argv);
 	return 0;
 }

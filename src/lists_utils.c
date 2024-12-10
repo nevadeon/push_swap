@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 16:30:16 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/10 14:14:43 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/10 14:59:44 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,13 @@ t_number_list	*ft_number_list_new(int number)
 	return (new_node);
 }
 
-void	printlist(t_number_list *list, const char *name)
+void	printlist(t_stack *stack, const char *name)
 {
-	printf("%s -> ", name);
+	t_number_list	*list;
+
+	printf("%s [len=%d min=%d max=%d] -> ",\
+		name, stack->len, stack->min, stack->max);
+	list = stack->list;
 	while (list != NULL)
 	{
 		printf("%2d ", list->number);
@@ -46,7 +50,7 @@ void	printlist(t_number_list *list, const char *name)
 	printf("\n");
 }
 
-int	ft_find_max(t_number_list *list)
+int	find_max(t_number_list *list)
 {
 	int	max;
 
@@ -60,7 +64,7 @@ int	ft_find_max(t_number_list *list)
 	return (max);
 }
 
-int	ft_find_min(t_number_list *list)
+int	find_min(t_number_list *list)
 {
 	int	min;
 

@@ -6,13 +6,13 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 13:53:55 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/10 13:59:26 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/10 14:59:47 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_swap(t_number_list **list)
+void	swap(t_number_list **list)
 {
 	t_number_list	*tmp;
 
