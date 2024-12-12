@@ -6,9 +6,8 @@ TEST_DIR="./tests"
 SRC_FILES=$(find "$SRC_DIR" -type f -name "*.c")
 TEST_FILES=$(find "$TEST_DIR" -type f -name "*.c")
 
-# Construire la ligne de la variable SRC à insérer dans le Makefile
-SRC_LINE="SRC := $(echo "$SRC_FILES" | tr '\n' ' ')"
-TEST_SRC_LINE="TEST_SRC := $(echo "$TEST_FILES" | tr '\n' ' ')"
+SRC_LINE="SRC := $(echo "$SRC_FILES" | sed 's|^\./||' | tr '\n' ' ')"
+TEST_SRC_LINE="TEST_SRC := $(echo "$TEST_FILES" | sed 's|^\./||' | tr '\n' ' ')"
 
 printf "$SRC_LINE\n"
 printf "$TEST_SRC_LINE\n"

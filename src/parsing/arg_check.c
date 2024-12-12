@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 14:01:42 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/10 14:06:26 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/11 17:51:50 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ bool	is_string_digits(const char *str)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if (ft_isdigit(str[i]) == false && str[i] != ' ')
+		if (ft_isdigit(str[i]) == false && str[i] != ' '
+			&& str[i] != '+' && str[i] != '-')
 			return (false);
 		i++;
 	}

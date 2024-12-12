@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:46:46 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/10 22:25:14 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:00:08 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,38 @@ typedef enum e_error
 	ERR_MAX
 }	t_error;
 
+typedef enum e_rotation
+{
+	INIT_VALUE,
+	SIMPLE_ROTATE,
+	SIMPLE_RROTATE,
+	DOUBLE_ROTATE,
+	DOUBLE_RROTATE,
+	OPPOSITE_SRC_ROTATE,
+	OPPOSITE_SRC_RROTATE
+}	t_rotation;
+
 typedef struct s_value_index
 {
 	int	value;
 	int	index;
 }	t_value_index;
+
+typedef struct s_operation
+{
+	int			nb_index;
+	int			target_index;
+	int			cost;
+	t_rotation	rotation_instruction;
+}	t_operation;
+
+typedef struct s_movement_cost
+{
+	int	double_rotate;
+	int	double_rrotate;
+	int	opposite_src_rotate;
+	int	opposite_src_rrotate;
+}	t_movement_cost;
 
 typedef struct s_number_list
 {
@@ -69,5 +96,9 @@ int				find_min(t_number_list *list);
 int				find_max(t_number_list *list);
 
 void			ft_error(t_error error_code);
+
+// test
+t_stack			*stack_from_string(char *str);
+t_operation		find_cheapest(t_stack *src, t_stack *dest);
 
 #endif
