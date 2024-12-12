@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:46:46 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/12 15:00:08 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:29:47 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef enum e_error
 {
 	ERR_OK,
 	ERROR,
+	ERR_NO_NUMBER,
 	ERR_MAX
 }	t_error;
 
@@ -81,6 +82,8 @@ void			check_duplicates(t_number_list *list);
 
 /* algo */
 void			push_swap(int argc, char *argv[]);
+void			sort_size3_stack(t_stack *stack);
+t_operation		find_cheapest(t_stack *src, t_stack *dest);
 
 /* operations */
 void			push(t_stack *src, t_stack *dest);
@@ -89,16 +92,18 @@ void			rotate(t_number_list **list);
 void			reverse_rotate(t_number_list **list);
 
 /* list utils */
-t_list			*ft_lstprevlast(t_list *lst);
-t_number_list	*ft_number_list_new(int number);
-void			printlist(t_stack *stack, const char *name);
 int				find_min(t_number_list *list);
 int				find_max(t_number_list *list);
+int				get_index(int value, t_number_list *list);
+t_number_list	*ft_number_list_new(int number);
+t_list			*ft_lstprevlast(t_list *lst);
 
+/* error management */
 void			ft_error(t_error error_code);
 
 // test
 t_stack			*stack_from_string(char *str);
 t_operation		find_cheapest(t_stack *src, t_stack *dest);
+void			printlist(t_stack *stack, const char *name);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:48:44 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/10 15:02:25 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:12:15 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ const char	*get_error_message(t_error error_code)
 	static const char	*message[] = {\
 		[ERR_OK] = "The impossible happened", \
 		[ERROR] = "Error", \
+		[ERR_NO_NUMBER] = "No number match was found in the list", \
 		[ERR_MAX] = "Ft_error was called with out of bound index"
 	};
 

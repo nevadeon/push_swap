@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/09 14:46:22 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/12 15:15:46 by ndavenne         ###   ########.fr       */
+/*   Created: 2024/12/12 15:32:07 by ndavenne          #+#    #+#             */
+/*   Updated: 2024/12/12 15:32:26 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-
-
-int main(void)
+void	printlist(t_stack *stack, const char *name)
 {
-	t_stack	*a;
-	t_stack *b;
+	t_number_list	*list;
 
-	// push_swap(argc, argv);
-
-	a = stack_from_string("-38 10 7 42");
-	b = stack_from_string("25 0 99");
-	printlist(a, "a");
-	printlist(b, "b");
-	printf("cheapest index: a %d | b %d\n", find_cheapest(a, b).nb_index, find_cheapest(a, b).target_index);
-	return 0;
+	printf("%s [len:%-3d min:%-3d max:%-3d] -> ",\
+		name, stack->len, stack->min, stack->max);
+	list = stack->list;
+	while (list != NULL)
+	{
+		printf("%3d ", list->number);
+		list = list->next;
+	}
+	printf("\n");
 }
