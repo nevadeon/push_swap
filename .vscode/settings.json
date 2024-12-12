@@ -17,6 +17,7 @@
 		"string": "c",
 		"unordered_map": "c",
 		"vector": "c",
-		"algorithm": "c"
+		"algorithm": "c",
+		"chrono": "c"
 	}
 }

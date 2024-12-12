@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:46:46 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/12 15:29:47 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/12 18:20:00 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,34 +30,28 @@ typedef enum e_error
 typedef enum e_rotation
 {
 	INIT_VALUE,
-	SIMPLE_ROTATE,
-	SIMPLE_RROTATE,
-	DOUBLE_ROTATE,
-	DOUBLE_RROTATE,
-	OPPOSITE_SRC_ROTATE,
-	OPPOSITE_SRC_RROTATE
+	ROTATE,
+	RROTATE
 }	t_rotation;
-
-typedef struct s_value_index
-{
-	int	value;
-	int	index;
-}	t_value_index;
 
 typedef struct s_operation
 {
-	int			nb_index;
-	int			target_index;
-	int			cost;
-	t_rotation	rotation_instruction;
+	int			total_cost;
+	int			ref_cost;
+	int			target_cost;
+	t_rotation	src;
+	t_rotation	dest;
 }	t_operation;
 
 typedef struct s_movement_cost
 {
+	int	ref_index;
+	int	target_index;
 	int	double_rotate;
 	int	double_rrotate;
 	int	opposite_src_rotate;
 	int	opposite_src_rrotate;
+	int	smallest;
 }	t_movement_cost;
 
 typedef struct s_number_list
@@ -83,7 +77,7 @@ void			check_duplicates(t_number_list *list);
 /* algo */
 void			push_swap(int argc, char *argv[]);
 void			sort_size3_stack(t_stack *stack);
-t_operation		find_cheapest(t_stack *src, t_stack *dest);
+t_operation		find_cheapest_operation(t_stack *src, t_stack *dest);
 
 /* operations */
 void			push(t_stack *src, t_stack *dest);
@@ -95,6 +89,7 @@ void			reverse_rotate(t_number_list **list);
 int				find_min(t_number_list *list);
 int				find_max(t_number_list *list);
 int				get_index(int value, t_number_list *list);
+int				get_value(int index, t_number_list *list);
 t_number_list	*ft_number_list_new(int number);
 t_list			*ft_lstprevlast(t_list *lst);
 
@@ -103,7 +98,6 @@ void			ft_error(t_error error_code);
 
 // test
 t_stack			*stack_from_string(char *str);
-t_operation		find_cheapest(t_stack *src, t_stack *dest);
 void			printlist(t_stack *stack, const char *name);
 
 #endif
