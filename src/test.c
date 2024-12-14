@@ -6,18 +6,19 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:32:07 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/12 15:32:26 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/13 18:06:46 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	printlist(t_stack *stack, const char *name)
+void	printlist(t_stack *stack)
 {
 	t_number_list	*list;
 
-	printf("%s [len:%-3d min:%-3d max:%-3d] -> ",\
-		name, stack->len, stack->min, stack->max);
+	// printf("%s [len:%-3d min:%-3d max:%-3d] -> ",\
+	// 	name, stack->len, stack->min, stack->max);
+	printf("%c ->", stack->name);
 	list = stack->list;
 	while (list != NULL)
 	{
@@ -25,4 +26,17 @@ void	printlist(t_stack *stack, const char *name)
 		list = list->next;
 	}
 	printf("\n");
+}
+
+t_stack	*stack_from_string(char *str, char c)
+{
+	t_stack	*stack;
+
+	stack = malloc(sizeof(t_stack));
+	stack->list = list_from_tab(ft_split(str, ' '));
+	stack->len = ft_lstsize((t_list *)stack->list);
+	stack->max = find_max(stack->list);
+	stack->min = find_min(stack->list);
+	stack->name = c;
+	return(stack);
 }

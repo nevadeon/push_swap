@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:26:16 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/11 18:16:27 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/13 17:32:26 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,14 @@ void	init_stacks(int argc, char *argv[], t_stack *a, t_stack *b)
 		a_list = list_from_args(argc, argv);
 	*a = (t_stack){
 		.list = a_list,
+		.name = 'a',
 		.len = ft_lstsize((t_list *)a_list),
 		.max = find_max(a_list),
 		.min = find_min(a_list)
 	};
 	*b = (t_stack){
 		.list = NULL,
+		.name = 'b',
 		.len = 0,
 		.max = INT32_MIN,
 		.min = INT32_MAX
@@ -71,16 +73,4 @@ void	parsing(int argc, char *argv[], t_stack *a, t_stack *b)
 	check_args(argc, argv);
 	init_stacks(argc, argv, a, b);
 	check_duplicates(a->list);
-}
-
-t_stack	*stack_from_string(char *str)
-{
-	t_stack	*stack;
-
-	stack = malloc(sizeof(t_stack));
-	stack->list = list_from_tab(ft_split(str, ' '));
-	stack->len = ft_lstsize((t_list *)stack->list);
-	stack->max = find_max(stack->list);
-	stack->min = find_min(stack->list);
-	return(stack);
 }
