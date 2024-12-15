@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:46:46 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/15 01:36:08 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/15 02:37:30 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,10 @@ typedef struct s_rotation_instruction
 
 typedef struct s_rotation_costs
 {
-	int	source_index;		// Index of the element in the source stack
-	int	target_index;		// Index of the element in the destination stack
+	int	source_rotate;		// Cost of rotating the source on top
+	int	source_rrotate;		// Cost of reverse rotating the source on top
+	int	target_rotate;		// Cost of rotating the target on top
+	int	target_rrotate;		// Cost of reverse rotating the target on top
 	int	double_rotate;		// Cost of double rotation
 	int	double_rrotate;		// Cost of double reverse rotation
 	int	opposite_rotate;	// Cost of rotating source and reverse rotating dest
@@ -71,6 +73,9 @@ typedef struct s_stack
 	int				max;
 }	t_stack;
 
+typedef t_rotation_instruction	t_ri;
+typedef bool					(*t_compare_function)(int, int);
+
 /* parsing */
 void			parsing(int argc, char *argv[], t_stack *a, t_stack *b);
 void			init_stacks(int argc, char *argv[], t_stack *a, t_stack *b);
@@ -80,13 +85,14 @@ void			check_duplicates(t_number_list *list);
 /* algo */
 void			push_swap(int argc, char *argv[]);
 void			sort_size3_stack(t_stack *stack);
-t_rotation_instruction	find_best_instructions(t_stack *src, t_stack *dest, bool (*compare)(int, int));
+t_ri			find_best_instructions(t_stack *src, t_stack *dest, \
+t_compare_function compare);
 
 /* rotation_utils */
-t_rotation_instruction	create_double_rotate(t_rotation_costs rc);
-t_rotation_instruction	create_double_rrotate(t_rotation_costs rc, t_stack *s, t_stack *d);
-t_rotation_instruction	create_opposite_rotate(t_rotation_costs rc, t_stack *d);
-t_rotation_instruction	create_opposite_rrotate(t_rotation_costs rc, t_stack *s, t_stack *d);
+t_ri			create_double_rotate(t_rotation_costs rc);
+t_ri			create_double_rrotate(t_rotation_costs rc);
+t_ri			create_opposite_rotate(t_rotation_costs rc);
+t_ri			create_opposite_rrotate(t_rotation_costs rc);
 
 /* operations */
 void			push_with_print(t_stack *src, t_stack *dest);
@@ -96,9 +102,10 @@ void			rotate_with_print(t_stack *stack, t_rotation direction);
 
 /* numbers utils */
 int				max(int n1, int n2);
+int				min(int n1, int n2, int n3, int n4);
 bool			is_ascending(int n1, int n2);
 bool			is_descending(int n1, int n2);
-bool			is_sorted(t_number_list *list, bool (*compare)(int, int));
+bool			is_sorted(t_number_list *list, t_compare_function compare);
 
 /* list utils */
 int				find_min(t_number_list *list);
@@ -114,5 +121,7 @@ void			ft_error(t_error error_code);
 /* debug */
 t_stack			*stack_from_string(char *str, char c);
 void			printlist(t_stack *stack);
+void			turk(t_stack *a, t_stack *b);
+t_number_list	*list_from_tab(char	**tab);
 
 #endif

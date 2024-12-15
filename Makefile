@@ -36,12 +36,12 @@ VALGRIND_FLAGS := --leak-check=full --show-leak-kinds=all
 GDB_FLAGS := --quiet --args
 
 # Sources and objects
-SRC := src/error.c src/main.c src/operations/swap.c src/operations/rotate.c src/operations/push.c src/parsing/arg_check.c src/parsing/parsing.c src/algo/push_swap.c src/algo/sort_size3_stack.c src/algo/operation_selection.c src/algo/numbers_utils.c src/test.c src/lists.c src/number_lists.c
+SRC := src/error.c src/main.c src/operations/swap.c src/operations/rotate.c src/operations/push.c src/parsing/arg_check.c src/parsing/parsing.c src/algo/push_swap.c src/algo/sort_size3_stack.c src/algo/operation_selection.c src/algo/numbers_utils.c src/algo/rotation_utils.c src/test.c src/lists.c src/number_lists.c 
 OBJ := $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 LIB := libndav.a
 
 # Test sources and objects
-TEST_SRC := tests/test_main.c
+TEST_SRC := tests/test_main.c 
 TEST_OBJ := $(patsubst $(TEST_DIR)/%.c, $(OBJ_DIR)/tests/%.o, $(TEST_SRC))
 # Exclude main program from test
 TEST_LINK_OBJ := $(filter-out $(OBJ_DIR)/$(NAME).o, $(OBJ)) $(TEST_OBJ)
