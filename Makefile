@@ -29,19 +29,19 @@ LIB_INC_DIR := include
 TEST_DIR := tests
 
 # Flags
-CFLAGS := -Wall -Wextra -I$(INC_DIR)
+CFLAGS := -Wall -Werror -Wextra -I$(INC_DIR)
 LIB_HEADER_FLAG := -I$(LIB_DIR)/$(LIB_INC_DIR)
 LDFLAGS := -L$(LIB_DIR) -lndav $(LIB_HEADER_FLAG)
 VALGRIND_FLAGS := --leak-check=full --show-leak-kinds=all
 GDB_FLAGS := --quiet --args
 
 # Sources and objects
-SRC := src/error.c src/operations/swap.c src/operations/push.c src/operations/rotate.c src/parsing/arg_check.c src/parsing/parsing.c src/algo/push_swap.c src/algo/sort_size3_stack.c src/algo/numbers_utils.c src/algo/rotation_utils.c src/algo/rotation_instructions.c src/test.c src/lists.c src/number_lists.c src/main.c
+SRC := src/error.c src/parsing/parsing.c src/parsing/arguments_checks.c src/main.c src/push_swap.c src/utils/lists.c src/utils/number_lists.c src/utils/numbers.c src/stack_operations/swap.c src/stack_operations/push.c src/stack_operations/rotate.c src/stack_operations/stack_rotations.c src/algorithm/sort_size3_stack.c src/algorithm/turk/instructions_selection.c src/algorithm/turk/algorithm.c src/algorithm/turk/instructions_initialisation.c 
 OBJ := $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 LIB := libndav.a
 
 # Test sources and objects
-TEST_SRC := tests/test_main.c
+TEST_SRC := tests/test_main.c tests/test.c 
 TEST_OBJ := $(patsubst $(TEST_DIR)/%.c, $(OBJ_DIR)/tests/%.o, $(TEST_SRC))
 # Exclude main program from test
 TEST_LINK_OBJ := $(filter-out $(OBJ_DIR)/$(NAME).o, $(OBJ)) $(TEST_OBJ)

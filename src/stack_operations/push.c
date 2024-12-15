@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 13:53:55 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/14 21:45:12 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/15 16:54:37 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,5 @@ void	push(t_stack *src, t_stack *dest)
 void	push_with_print(t_stack *src, t_stack *dest)
 {
 	push(src, dest);
-	ft_dprintf(STDOUT_FILENO, "p%c\n", src->name);
+	ft_dprintf(STDOUT_FILENO, "p%c\n", dest->name);
 }

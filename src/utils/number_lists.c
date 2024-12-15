@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:25:50 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/14 21:29:28 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/15 18:12:48 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ t_number_list	*ft_number_list_new(int number)
 {
 	t_number_list	*new_node;
 
-	new_node = malloc(sizeof(t_number_list));
+	new_node = ft_arena_alloc(sizeof(t_number_list));
 	if (new_node == NULL)
 		return (NULL);
 	new_node->number = number;
