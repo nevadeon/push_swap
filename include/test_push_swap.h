@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 12:07:38 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/15 00:11:36 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/15 02:50:34 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,14 @@
 
 # include <assert.h>
 # include <stdio.h>
+# include "push_swap.h"
 
 # define ft_arena_alloc malloc
+
+/* debug */
+t_stack			*stack_from_string(char *str, char c);
+void			printlist(t_stack *stack);
+void			turk(t_stack *a, t_stack *b);
+t_number_list	*list_from_tab(char	**tab);
 
 #endif

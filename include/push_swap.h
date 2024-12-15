@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:46:46 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/15 02:46:23 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/15 02:50:22 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ typedef enum e_rotation
 typedef struct s_rotation_instruction
 {
 	int			total_cost;		// Total cost of the operation
-	int			source_cost;	// Cost of rotating the source stack
-	int			dest_cost;		// Cost of rotating the destination stack
+	int			source_cost;	// Cost of rotating the source on top
+	int			dest_cost;		// Cost of rotating the destination on top
 	t_rotation	src;			// Source rotation direction
 	t_rotation	dest;			// Destination rotation direction
 }	t_rotation_instruction;
@@ -117,11 +117,5 @@ t_list			*ft_lstprevlast(t_list *lst);
 
 /* error management */
 void			ft_error(t_error error_code);
-
-/* debug */
-t_stack			*stack_from_string(char *str, char c);
-void			printlist(t_stack *stack);
-void			turk(t_stack *a, t_stack *b);
-t_number_list	*list_from_tab(char	**tab);
 
 #endif
