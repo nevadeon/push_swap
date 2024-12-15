@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:32:07 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/13 18:06:46 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/14 21:31:48 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ void	printlist(t_stack *stack)
 {
 	t_number_list	*list;
 
-	// printf("%s [len:%-3d min:%-3d max:%-3d] -> ",\
-	// 	name, stack->len, stack->min, stack->max);
 	printf("%c ->", stack->name);
 	list = stack->list;
 	while (list != NULL)
@@ -38,5 +36,5 @@ t_stack	*stack_from_string(char *str, char c)
 	stack->max = find_max(stack->list);
 	stack->min = find_min(stack->list);
 	stack->name = c;
-	return(stack);
+	return (stack);
 }

@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 13:53:55 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/10 14:59:47 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/14 21:45:12 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,13 @@ void	swap(t_number_list **list)
 	(*list)->next = tmp;
 }
 
+void	swap_with_print(t_stack *stack)
+{
+	swap(&stack->list);
+	ft_dprintf(STDOUT_FILENO, "s%c\n", stack->name);
+}
+
+// same function but swaps content instead of nodes
 // void	ft_swap(t_list **stack)
 // {
 // 	int	*tmp;

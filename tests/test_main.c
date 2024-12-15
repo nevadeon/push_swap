@@ -6,14 +6,14 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 12:06:29 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/09 15:59:22 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/14 21:36:53 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "test_push_swap.h"
 
-int main()
+int	main(void)
 {
 	printf("ok\n");
-	return 0;
+	return (0);
 }

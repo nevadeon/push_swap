@@ -36,7 +36,7 @@ VALGRIND_FLAGS := --leak-check=full --show-leak-kinds=all
 GDB_FLAGS := --quiet --args
 
 # Sources and objects
-SRC := src/error.c src/main.c src/operations/push.c src/operations/swap.c src/operations/rotate.c src/parsing/arg_check.c src/parsing/parsing.c src/algo/push_swap.c src/algo/sort_size3_stack.c src/algo/operation_selection.c src/test.c src/lists.c src/number_lists.c
+SRC := src/error.c src/main.c src/operations/swap.c src/operations/rotate.c src/operations/push.c src/parsing/arg_check.c src/parsing/parsing.c src/algo/push_swap.c src/algo/sort_size3_stack.c src/algo/operation_selection.c src/algo/numbers_utils.c src/test.c src/lists.c src/number_lists.c
 OBJ := $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 LIB := libndav.a
 
@@ -101,15 +101,16 @@ $(OBJ_DIR)/$(TEST_DIR)/%.o: $(TEST_DIR)/%.c
 #        Test rules                                                            #
 # ============================================================================ #
 
+test: CFLAGS += -DINCLUDE_TEST_HEADER
 test: $(TEST_BIN)
 	@printf "$(YELLOW)Lancement des tests...\n$(RESET)"
 	@./$(TEST_BIN)
 
-val: CFLAGS += -g
+val: CFLAGS += -g -DINCLUDE_TEST_HEADER
 val: libtest re
 	valgrind $(VALGRIND_FLAGS) ./$(NAME) $(TEST_ARGUMENTS)
 
-gdb: CFLAGS += -g
+gdb: CFLAGS += -g -DINCLUDE_TEST_HEADER
 gdb: libtest re
 	gdb $(GDB_FLAGS) ./$(NAME) $(TEST_ARGUMENTS)
 

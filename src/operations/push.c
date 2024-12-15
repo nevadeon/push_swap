@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 13:53:55 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/14 19:36:29 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/14 21:45:12 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,10 @@ void	push(t_stack *src, t_stack *dest)
 		src->min = find_min(src->list);
 	dest->len++;
 	src->len--;
+}
+
+void	push_with_print(t_stack *src, t_stack *dest)
+{
+	push(src, dest);
+	ft_dprintf(STDOUT_FILENO, "p%c\n", src->name);
 }

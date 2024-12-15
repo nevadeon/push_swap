@@ -6,18 +6,30 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 14:03:28 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/11/05 16:21:48 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/15 01:30:25 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libndav.h"
+
+static t_list	*_lstnew(void *content)
+{
+	t_list	*new_node;
+
+	new_node = malloc(sizeof(t_list));
+	if (new_node == NULL)
+		return (NULL);
+	new_node->content = content;
+	new_node->next = NULL;
+	return (new_node);
+}
 
 static t_list	**_arena_head(void)
 {
 	static t_list	*arena_head = NULL;
 
 	if (arena_head == NULL)
-		arena_head = ft_lstnew(malloc(ARENA_BLOCK_SIZE));
+		arena_head = _lstnew(malloc(ARENA_BLOCK_SIZE));
 	return (&arena_head);
 }
 
@@ -47,7 +59,7 @@ void	*ft_arena_alloc(size_t size)
 	{
 		while (size > block_size)
 			block_size *= 2;
-		ft_lstadd_front(arena, ft_lstnew(malloc(block_size)));
+		ft_lstadd_front(arena, _lstnew(malloc(block_size)));
 		if ((*arena) == NULL)
 			return (NULL);
 		pos = 0;
