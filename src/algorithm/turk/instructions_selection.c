@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:21:59 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/16 15:40:27 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/16 16:20:27 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ int	init_target(t_compare_function compare)
 		return (INT32_MAX);
 	else if (compare == is_descending)
 		return (INT32_MIN);
-	else
-		ft_error(ERR_COMPARE_FUNCTION);
+	return (ft_error(ERR_COMPARE_FUNCTION), 0);
 }
 
 int	find_target(int reference, t_stack *dest, t_compare_function compare)
