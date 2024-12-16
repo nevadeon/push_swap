@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotation_instructions.c                            :+:      :+:    :+:   */
+/*   instructions_selection.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:21:59 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/15 02:47:52 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/16 15:40:27 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 int	init_target(t_compare_function compare)
 {
-	if (compare(0, 42) == ASCENDING_ORDER)
+	if (compare == is_ascending)
 		return (INT32_MAX);
-	else
+	else if (compare == is_descending)
 		return (INT32_MIN);
+	else
+		ft_error(ERR_COMPARE_FUNCTION);
 }
 
 int	find_target(int reference, t_stack *dest, t_compare_function compare)
@@ -40,7 +42,7 @@ int	find_target(int reference, t_stack *dest, t_compare_function compare)
 	}
 	if (found == false)
 	{
-		if (compare(0, 42) == ASCENDING_ORDER)
+		if (compare == is_ascending)
 			target = dest->min;
 		else
 			target = dest->max;
