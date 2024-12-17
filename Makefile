@@ -53,32 +53,31 @@ TERM_UP := \033[1A
 #         Progress bar                                                         #
 # ============================================================================ #
 
-TOTAL_FILES     := $(words $(OBJ))
-COMPILED_COUNT  := 0
+TOTAL_FILES := $(words $(OBJ))
 
 define update_progress_bar
-    @if [ ! -f .compiled_count ]; then \
-        echo 0 > .compiled_count; \
-        printf "\n"; \
-    fi; \
-    COMPILED_COUNT=$$(cat .compiled_count); \
-    COMPILED_COUNT=$$((COMPILED_COUNT + 1)); \
-    echo $$COMPILED_COUNT > .compiled_count; \
-    PROGRESS=$$((COMPILED_COUNT * 100 / $(TOTAL_FILES))); \
-    BAR_LENGTH=40; \
-    FILLED=$$((PROGRESS * BAR_LENGTH / 100)); \
-    EMPTY=$$((BAR_LENGTH - FILLED)); \
-    BAR=$$(printf "%0.s#" $$(seq 1 $$FILLED)); \
-    EMPTY_BAR=$$(printf "%0.s-" $$(seq 1 $$EMPTY)); \
-    if [ $$EMPTY -eq 0 ]; then \
-        EMPTY_BAR=""; \
-    fi; \
+	@if [ ! -f .compiled_count ]; then \
+		echo 0 > .compiled_count; \
+		printf "\n"; \
+	fi; \
+	COMPILED_COUNT=$$(cat .compiled_count); \
+	COMPILED_COUNT=$$((COMPILED_COUNT + 1)); \
+	echo $$COMPILED_COUNT > .compiled_count; \
+	PROGRESS=$$((COMPILED_COUNT * 100 / $(TOTAL_FILES))); \
+	BAR_LENGTH=40; \
+	FILLED=$$((PROGRESS * BAR_LENGTH / 100)); \
+	EMPTY=$$((BAR_LENGTH - FILLED)); \
+	BAR=$$(printf "%0.s#" $$(seq 1 $$FILLED)); \
+	EMPTY_BAR=$$(printf "%0.s-" $$(seq 1 $$EMPTY)); \
+	if [ $$EMPTY -eq 0 ]; then \
+		EMPTY_BAR=""; \
+	fi; \
 	LEFT_TEXT="Compiling $(NAME)..."; \
-    LEFT_TEXT_LENGTH=$$(echo -n $$LEFT_TEXT | wc -m); \
+	LEFT_TEXT_LENGTH=$$(echo -n $$LEFT_TEXT | wc -m); \
 	TERMINAL_SIZE=$$(tput cols); \
 	SPACE_NUMBER=$$((TERMINAL_SIZE - LEFT_TEXT_LENGTH - BAR_LENGTH - 2)); \
-    SPACES=$$(printf "%0.s " $$(seq 1 $$SPACE_NUMBER)); \
-    printf "$(TERM_UP)$(CLEAR_LINE)$(YELLOW)$$LEFT_TEXT$(RESET_COLOR)$$SPACES[$$BAR$$EMPTY_BAR]\n";
+	SPACES=$$(printf "%0.s " $$(seq 1 $$SPACE_NUMBER)); \
+	printf "$(TERM_UP)$(YELLOW)$$LEFT_TEXT$(RESET_COLOR)$$SPACES[$$BAR$$EMPTY_BAR]\n";
 endef
 
 # ============================================================================ #
@@ -100,11 +99,9 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 re: fclean all
 
 clean:
-	@printf "$(YELLOW)Removing object files...\n$(RESET_COLOR)"
 	@rm -rf $(OBJ_DIR)
 
 fclean: clean
-	@printf "$(YELLOW)Removing $(NAME)...\n$(RESET_COLOR)"
 	@rm -f $(NAME)
 
 # ============================================================================ #
