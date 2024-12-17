@@ -12,11 +12,10 @@ RESET := \033[0m
 CLEAR_LINE := \033[K
 
 # ============================================================================ #
-#        Config variables                                                      #
+#        Variables                                                             #
 # ============================================================================ #
 
 NAME := push_swap
-TEST_BIN := test_bin
 
 CC := cc
 
@@ -24,38 +23,40 @@ CC := cc
 SRC_DIR := src
 OBJ_DIR := obj
 INC_DIR := include
-LIB_DIR := libndav
-LIB_INC_DIR := include
-TEST_DIR := tests
 
 # Flags
 CFLAGS := -Wall -Werror -Wextra -I$(INC_DIR)
+LDFLAGS = -L$(LIB_DIR) -lndav $(LIB_HEADER_FLAG)
+
+# Sources and objects
+SRC := src/error.c src/parsing/arguments_checks.c src/parsing/parsing.c src/main.c src/utils/lists.c src/utils/number_lists.c src/utils/numbers.c src/stack_operations/push.c src/stack_operations/rotate.c src/stack_operations/swap.c src/stack_operations/apply_instructions.c src/stack_operations/min_on_top.c src/algorithm/turk/instructions_selection.c src/algorithm/turk/instructions_initialisation.c src/algorithm/turk/algorithm.c src/algorithm/sort_size3_stack.c src/push_swap.c
+OBJ := $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
+
+# Library
+LIB := libndav.a
+LIB_DIR := libndav
+LIB_INC_DIR := include
 LIB_HEADER_FLAG := -I$(LIB_DIR)/$(LIB_INC_DIR)
-LDFLAGS := -L$(LIB_DIR) -lndav $(LIB_HEADER_FLAG)
+
+# Test
+TEST_BIN := test_bin
+TEST_DIR := tests
+TEST_SRC := tests/test_main.c tests/test.c
+TEST_OBJ := $(patsubst $(TEST_DIR)/%.c, $(OBJ_DIR)/tests/%.o, $(TEST_SRC))
+TEST_LINK_OBJ := $(filter-out $(OBJ_DIR)/$(NAME).o, $(OBJ)) $(TEST_OBJ)
+
 VALGRIND_FLAGS := --leak-check=full --show-leak-kinds=all
 GDB_FLAGS := --quiet --args
 
-# Sources and objects
-SRC := src/error.c src/parsing/arguments_checks.c src/parsing/parsing.c src/main.c src/utils/lists.c src/utils/number_lists.c src/utils/numbers.c src/stack_operations/push.c src/stack_operations/rotate.c src/stack_operations/swap.c src/stack_operations/apply_instructions.c src/stack_operations/min_on_top.c src/algorithm/turk/instructions_selection.c src/algorithm/turk/instructions_initialisation.c src/algorithm/turk/algorithm.c src/algorithm/sort_size3_stack.c src/push_swap.c 
-OBJ := $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
-LIB := libndav.a
-
-# Test sources and objects
-TEST_SRC := tests/test_main.c tests/test.c 
-TEST_OBJ := $(patsubst $(TEST_DIR)/%.c, $(OBJ_DIR)/tests/%.o, $(TEST_SRC))
-# Exclude main program from test
-TEST_LINK_OBJ := $(filter-out $(OBJ_DIR)/$(NAME).o, $(OBJ)) $(TEST_OBJ)
-
-# Test
-TEST_ARGUMENTS := 99 0 25 -38 10 7 42
+TEST_ARGS := 99 0 25 -38 10 7 42
 
 # ============================================================================ #
-#        Compilation rules                                                     #
+#        Main rules                                                            #
 # ============================================================================ #
 
 all: $(NAME)
 
-$(NAME): $(LIB_DIR)/$(LIB) msg_comp $(OBJ)
+$(NAME): $(LIB_DIR)/$(LIB) compilation_message $(OBJ)
 	@$(CC) $(CFLAGS) -o $@ $(OBJ) $(LDFLAGS)
 	@printf "$(GREEN)✔ $(NAME) created.\n$(RESET)"
 
@@ -65,18 +66,16 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 
 re: fclean all
 
-# ============================================================================ #
-#        Cleaning rules                                                        #
-# ============================================================================ #
-
-clean: msg_clean
+clean:
+	@printf "$(YELLOW)Removing object files...\n$(RESET)"
 	@rm -rf $(OBJ_DIR)
 
-fclean: clean msg_fclean
+fclean: clean
+	@printf "$(YELLOW)Removing $(NAME)...\n$(RESET)"
 	@rm -rf $(NAME)
 
 # ============================================================================ #
-#        Lib managing rules                                                    #
+#        Library rules                                                         #
 # ============================================================================ #
 
 $(LIB_DIR)/$(LIB):
@@ -86,7 +85,7 @@ lclean:
 	@$(MAKE) -s -C $(LIB_DIR) fclean
 
 # ============================================================================ #
-#        Test compilation rules                                                #
+#        Test rules                                                            #
 # ============================================================================ #
 
 $(TEST_BIN): $(TEST_LINK_OBJ)
@@ -97,10 +96,6 @@ $(OBJ_DIR)/$(TEST_DIR)/%.o: $(TEST_DIR)/%.c
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) $(LIB_HEADER_FLAG) -c $< -o $@
 
-# ============================================================================ #
-#        Test rules                                                            #
-# ============================================================================ #
-
 test: CFLAGS += -DINCLUDE_TEST_HEADER
 test: $(TEST_BIN)
 	@printf "$(YELLOW)Lancement des tests...\n$(RESET)"
@@ -108,26 +103,20 @@ test: $(TEST_BIN)
 
 val: CFLAGS += -g
 val: libtest re
-	valgrind $(VALGRIND_FLAGS) ./$(NAME) $(TEST_ARGUMENTS)
+	valgrind $(VALGRIND_FLAGS) ./$(NAME) $(TEST_ARGS)
 
 gdb: CFLAGS += -g
 gdb: libtest re
-	gdb $(GDB_FLAGS) ./$(NAME) $(TEST_ARGUMENTS)
+	gdb $(GDB_FLAGS) ./$(NAME) $(TEST_ARGS)
 
 libtest:
 	@make -s -C $(LIB_DIR) test
 
 # ============================================================================ #
-#        Terminal message rules                                                #
+#        Other rules                                                           #
 # ============================================================================ #
 
-msg_comp:
+compilation_message:
 	@printf "$(YELLOW)Compiling $(NAME)... [$(CFLAGS)]\n$(RESET)"
 
-msg_clean:
-	@printf "$(YELLOW)Removing object files...\n$(RESET)"
-
-msg_fclean:
-	@printf "$(YELLOW)Removing $(NAME)...\n$(RESET)"
-
-.PHONY: all clean fclean lclean re val gdb libtest msg_comp msg_clean msg_fclean
+.PHONY: all clean fclean lclean re val gdb libtest compilation_message
