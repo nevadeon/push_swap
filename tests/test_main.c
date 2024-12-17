@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 12:06:29 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/14 21:36:53 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/17 13:07:00 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	main(void)
 {
-	printf("ok\n");
+	assert(min(1, 2, 3, 4) == 1);
+	assert(min(1, 2, 3, 4) == 0);
 	return (0);
 }

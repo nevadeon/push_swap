@@ -6,16 +6,12 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:46:46 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/17 09:00:39 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/17 13:05:43 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
-
-# ifdef INCLUDE_TEST_HEADER
-#  include "test_push_swap.h"
-# endif
 
 # include <stdbool.h>
 # include <stdio.h>
@@ -125,5 +121,9 @@ t_list	*ft_lstprevlast(t_list *lst);
 
 /* error management */
 void	ft_error(t_error error_code);
+
+# ifdef INCLUDE_TEST_HEADER
+#  include "test_push_swap.h"
+# endif
 
 #endif

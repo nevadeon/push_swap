@@ -15,6 +15,8 @@ CLEAR_LINE := \033[K
 #        Variables                                                             #
 # ============================================================================ #
 
+# All headers should be in a folder named include for this to work
+
 NAME := push_swap
 
 CC := cc
@@ -25,27 +27,28 @@ OBJ_DIR := obj
 INC_DIR := include
 
 # Flags
-CFLAGS := -Wall -Werror -Wextra -I$(INC_DIR)
-LDFLAGS = -L$(LIB_DIR) -lndav $(LIB_HEADER_FLAG)
+CFLAGS = -Wall -Werror -Wextra -I$(INC_DIR) -I$(LIB_DIR)/$(INC_DIR)
+LDFLAGS = -L$(LIB_DIR) -lndav
 
 # Sources and objects
-SRC := src/error.c src/parsing/arguments_checks.c src/parsing/parsing.c src/main.c src/utils/lists.c src/utils/number_lists.c src/utils/numbers.c src/stack_operations/push.c src/stack_operations/rotate.c src/stack_operations/swap.c src/stack_operations/apply_instructions.c src/stack_operations/min_on_top.c src/algorithm/turk/instructions_selection.c src/algorithm/turk/instructions_initialisation.c src/algorithm/turk/algorithm.c src/algorithm/sort_size3_stack.c src/push_swap.c
+SRC := src/error.c src/parsing/arguments_checks.c src/parsing/parsing.c src/main.c src/utils/lists.c src/utils/number_lists.c src/utils/numbers.c src/stack_operations/push.c src/stack_operations/rotate.c src/stack_operations/swap.c src/stack_operations/apply_instructions.c src/stack_operations/min_on_top.c src/algorithm/turk/instructions_selection.c src/algorithm/turk/instructions_initialisation.c src/algorithm/turk/algorithm.c src/algorithm/sort_size3_stack.c
 OBJ := $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 
 # Library
 LIB := libndav.a
 LIB_DIR := libndav
-LIB_INC_DIR := include
-LIB_HEADER_FLAG := -I$(LIB_DIR)/$(LIB_INC_DIR)
 
-# Test
+# Tests
 TEST_BIN := test_bin
 TEST_DIR := tests
 TEST_SRC := tests/test_main.c tests/test.c
-TEST_OBJ := $(patsubst $(TEST_DIR)/%.c, $(OBJ_DIR)/tests/%.o, $(TEST_SRC))
-TEST_LINK_OBJ := $(filter-out $(OBJ_DIR)/$(NAME).o, $(OBJ)) $(TEST_OBJ)
+TEST_OBJ := $(patsubst $(TEST_DIR)/%.c, $(OBJ_DIR)/$(TEST_DIR)/%.o, $(TEST_SRC))
+TEST_LINK_OBJ := $(filter-out $(OBJ_DIR)/main.o, $(OBJ)) $(TEST_OBJ)
 
-VALGRIND_FLAGS := --leak-check=full --show-leak-kinds=all
+# Tests flags
+DEBUG_CFLAGS := -g
+TEST_CFLAGS := -I$(TEST_DIR)/$(INC_DIR) -DINCLUDE_TEST_HEADER
+VALGRIND_FLAGS := --quiet --leak-check=full --show-leak-kinds=all
 GDB_FLAGS := --quiet --args
 
 TEST_ARGS := 99 0 25 -38 10 7 42
@@ -62,7 +65,7 @@ $(NAME): $(LIB_DIR)/$(LIB) compilation_message $(OBJ)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) $(LIB_HEADER_FLAG) -o $@ -c $<
+	@$(CC) $(CFLAGS) -o $@ -c $<
 
 re: fclean all
 
@@ -94,18 +97,18 @@ $(TEST_BIN): $(TEST_LINK_OBJ)
 
 $(OBJ_DIR)/$(TEST_DIR)/%.o: $(TEST_DIR)/%.c
 	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) $(LIB_HEADER_FLAG) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
-test: CFLAGS += -DINCLUDE_TEST_HEADER
+test: CFLAGS += $(TEST_CFLAGS)
 test: $(TEST_BIN)
 	@printf "$(YELLOW)Lancement des tests...\n$(RESET)"
 	@./$(TEST_BIN)
 
-val: CFLAGS += -g
-val: libtest re
+valgrind: CFLAGS += $(DEBUG_CFLAGS)
+valgrind: libtest re
 	valgrind $(VALGRIND_FLAGS) ./$(NAME) $(TEST_ARGS)
 
-gdb: CFLAGS += -g
+gdb: CFLAGS += $(DEBUG_CFLAGS)
 gdb: libtest re
 	gdb $(GDB_FLAGS) ./$(NAME) $(TEST_ARGS)
 
@@ -119,4 +122,4 @@ libtest:
 compilation_message:
 	@printf "$(YELLOW)Compiling $(NAME)... [$(CFLAGS)]\n$(RESET)"
 
-.PHONY: all clean fclean lclean re val gdb libtest compilation_message
+.PHONY: all clean fclean lclean re valgrind gdb libtest compilation_message
