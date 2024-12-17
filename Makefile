@@ -45,35 +45,67 @@ TEST_ARGS := 99 0 25 -38 10 7 42
 GREEN := \033[0;32m
 YELLOW := \033[0;33m
 
-BOLD_GREEN := \033[1;32m
-BOLD_YELLOW := \033[1;33m
+RESET_COLOR := \033[0m
+CLEAR_LINE := \033[2K\r
+TERM_UP := \033[1A
 
-RESET := \033[0m
-CLEAR_LINE := \033[K
+# ============================================================================ #
+#         Progress bar                                                         #
+# ============================================================================ #
+
+TOTAL_FILES     := $(words $(OBJ))
+COMPILED_COUNT  := 0
+
+define update_progress_bar
+    @if [ ! -f .compiled_count ]; then \
+        echo 0 > .compiled_count; \
+        printf "\n"; \
+    fi; \
+    COMPILED_COUNT=$$(cat .compiled_count); \
+    COMPILED_COUNT=$$((COMPILED_COUNT + 1)); \
+    echo $$COMPILED_COUNT > .compiled_count; \
+    PROGRESS=$$((COMPILED_COUNT * 100 / $(TOTAL_FILES))); \
+    BAR_LENGTH=40; \
+    FILLED=$$((PROGRESS * BAR_LENGTH / 100)); \
+    EMPTY=$$((BAR_LENGTH - FILLED)); \
+    BAR=$$(printf "%0.s#" $$(seq 1 $$FILLED)); \
+    EMPTY_BAR=$$(printf "%0.s-" $$(seq 1 $$EMPTY)); \
+    if [ $$EMPTY -eq 0 ]; then \
+        EMPTY_BAR=""; \
+    fi; \
+	LEFT_TEXT="Compiling $(NAME)..."; \
+    LEFT_TEXT_LENGTH=$$(echo -n $$LEFT_TEXT | wc -m); \
+	TERMINAL_SIZE=$$(tput cols); \
+	SPACE_NUMBER=$$((TERMINAL_SIZE - LEFT_TEXT_LENGTH - BAR_LENGTH - 2)); \
+    SPACES=$$(printf "%0.s " $$(seq 1 $$SPACE_NUMBER)); \
+    printf "$(TERM_UP)$(CLEAR_LINE)$(YELLOW)$$LEFT_TEXT$(RESET_COLOR)$$SPACES[$$BAR$$EMPTY_BAR]\n";
+endef
 
 # ============================================================================ #
 #        Main rules                                                            #
 # ============================================================================ #
 
 all: $(NAME)
+	@rm -f .compiled_count
 
 $(NAME): $(LIB_DIR)/$(LIB) $(OBJ)
 	@$(CC) $(CFLAGS) -o $@ $(OBJ) $(LDFLAGS)
-# @printf "$(GREEN)✔ $(NAME) created.\n$(RESET)"
+	@printf "$(GREEN)✔ $(NAME) created.\n$(RESET_COLOR)"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -o $@ -c $<
+	@$(call update_progress_bar)
 
 re: fclean all
 
 clean:
-	@printf "$(YELLOW)Removing object files...\n$(RESET)"
+	@printf "$(YELLOW)Removing object files...\n$(RESET_COLOR)"
 	@rm -rf $(OBJ_DIR)
 
 fclean: clean
-	@printf "$(YELLOW)Removing $(NAME)...\n$(RESET)"
-	@rm -rf $(NAME)
+	@printf "$(YELLOW)Removing $(NAME)...\n$(RESET_COLOR)"
+	@rm -f $(NAME)
 
 # ============================================================================ #
 #        Library rules                                                         #
@@ -91,7 +123,7 @@ lclean:
 
 $(TEST_BIN): $(TEST_LINK_OBJ)
 	@$(CC) $(CFLAGS) -o $@ $(TEST_LINK_OBJ) $(LDFLAGS)
-	@printf "$(GREEN)✔ Binaire de test $(TEST_BIN) créé.\n$(RESET)"
+	@printf "$(GREEN)✔ Binaire de test $(TEST_BIN) créé.\n$(RESET_COLOR)"
 
 $(OBJ_DIR)/$(TEST_DIR)/%.o: $(TEST_DIR)/%.c
 	@mkdir -p $(dir $@)
@@ -99,7 +131,7 @@ $(OBJ_DIR)/$(TEST_DIR)/%.o: $(TEST_DIR)/%.c
 
 test: CFLAGS += $(TEST_CFLAGS)
 test: $(TEST_BIN)
-	@printf "$(YELLOW)Lancement des tests...\n$(RESET)"
+	@printf "$(YELLOW)Lancement des tests...\n$(RESET_COLOR)"
 	@./$(TEST_BIN)
 
 valgrind: CFLAGS += $(DEBUG_CFLAGS)
@@ -114,10 +146,7 @@ libtest:
 	@make -s -C $(LIB_DIR) test
 
 # ============================================================================ #
-#        Other rules                                                           #
+#        Phony                                                                 #
 # ============================================================================ #
 
-compilation_message:
-	@printf "$(YELLOW)Compiling $(NAME)... [$(CFLAGS)]\n$(RESET)"
-
-.PHONY: all clean fclean lclean re valgrind gdb libtest compilation_message
+.PHONY: all clean fclean lclean re valgrind gdb libtest
