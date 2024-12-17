@@ -36,12 +36,12 @@ VALGRIND_FLAGS := --leak-check=full --show-leak-kinds=all
 GDB_FLAGS := --quiet --args
 
 # Sources and objects
-SRC := src/error.c src/parsing/parsing.c src/parsing/arguments_checks.c src/main.c src/push_swap.c src/utils/lists.c src/utils/number_lists.c src/utils/numbers.c src/stack_operations/swap.c src/stack_operations/push.c src/stack_operations/rotate.c src/stack_operations/stack_rotations.c src/algorithm/sort_size3_stack.c src/algorithm/turk/instructions_selection.c src/algorithm/turk/algorithm.c src/algorithm/turk/instructions_initialisation.c
+SRC := src/error.c src/parsing/arguments_checks.c src/parsing/parsing.c src/main.c src/utils/lists.c src/utils/number_lists.c src/utils/numbers.c src/stack_operations/push.c src/stack_operations/rotate.c src/stack_operations/swap.c src/stack_operations/apply_instructions.c src/stack_operations/min_on_top.c src/algorithm/turk/instructions_selection.c src/algorithm/turk/instructions_initialisation.c src/algorithm/turk/algorithm.c src/algorithm/sort_size3_stack.c src/push_swap.c 
 OBJ := $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 LIB := libndav.a
 
 # Test sources and objects
-TEST_SRC := tests/test_main.c tests/test.c
+TEST_SRC := tests/test_main.c tests/test.c 
 TEST_OBJ := $(patsubst $(TEST_DIR)/%.c, $(OBJ_DIR)/tests/%.o, $(TEST_SRC))
 # Exclude main program from test
 TEST_LINK_OBJ := $(filter-out $(OBJ_DIR)/$(NAME).o, $(OBJ)) $(TEST_OBJ)

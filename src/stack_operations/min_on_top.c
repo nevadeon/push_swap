@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   min_on_top.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/15 18:16:44 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/17 08:18:55 by ndavenne         ###   ########.fr       */
+/*   Created: 2024/12/17 08:58:04 by ndavenne          #+#    #+#             */
+/*   Updated: 2024/12/17 09:00:39 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	push_swap(int argc, char *argv[])
+void	put_min_on_top(t_stack *stack)
 {
-	t_stack	a;
-	t_stack	b;
+	t_rotation		direction;
 
-	parsing(argc, argv, &a, &b);
-	if (is_sorted(a.list, is_ascending) == false)
-	{
-		if (a.len == 2)
-			swap(&a);
-		else if (a.len == 3)
-			sort_size3_stack(&a);
-		else
-			turk(&a, &b);
-	}
-	ft_free_arena();
+	if (get_index(stack->min, stack->list) <= stack->len / 2)
+		direction = ROTATE;
+	else
+		direction = REVERSE_ROTATE;
+	while (stack->list->number != stack->min)
+		rotate(stack, direction);
 }

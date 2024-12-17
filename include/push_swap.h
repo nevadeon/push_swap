@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:46:46 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/15 18:41:04 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/17 09:00:39 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,25 +25,27 @@
 
 typedef enum e_error
 {
-	ERR_OK,
+	ERROR_CODE_MIN,
 	ERROR,
-	ERR_NO_NUMBER,
-	ERR_MAX
+	ERROR_NO_NUMBER,
+	ERROR_COMPARE_FUNCTION,
+	ERROR_DIRECTION,
+	ERROR_CODE_MAX
 }	t_error;
 
 typedef enum e_rotation
 {
 	ROTATE,
-	RROTATE
+	REVERSE_ROTATE
 }	t_rotation;
 
 typedef struct s_rotation_instruction
 {
-	int			total_cost;		// Total cost of the operation
-	int			source_cost;	// Cost of rotating the source on top
-	int			dest_cost;		// Cost of rotating the destination on top
-	t_rotation	src;			// Source rotation direction
-	t_rotation	dest;			// Destination rotation direction
+	int			total_cost;			// Total cost of the operation
+	int			source_cost;		// Cost of rotating the source on top
+	int			dest_cost;			// Cost of rotating the destination on top
+	t_rotation	source_direction;	// Source rotation direction
+	t_rotation	dest_direction;		// Destination rotation direction
 }	t_rotation_instruction;
 
 typedef struct s_rotation_costs
@@ -99,10 +101,10 @@ t_ri	create_opposite_rotate(t_rotation_costs rc);
 t_ri	create_opposite_rrotate(t_rotation_costs rc);
 
 /* stack operations */
-void	push_with_print(t_stack *src, t_stack *dest);
-void	swap_with_print(t_stack *t_stack);
-void	rotate_no_print(t_stack *stack, t_rotation direction);
-void	rotate_with_print(t_stack *stack, t_rotation direction);
+void	push(t_stack *src, t_stack *dest);
+void	swap(t_stack *t_stack);
+void	rotate(t_stack *stack, t_rotation direction);
+void	double_rotate(t_stack *a, t_stack *b, t_rotation direction);
 void	put_min_on_top(t_stack *stack);
 void	apply_instructions(t_stack *s, t_stack *d, t_rotation_instruction ri);
 

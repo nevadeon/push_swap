@@ -6,13 +6,13 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 13:53:55 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/14 21:45:12 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/17 08:18:23 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap(t_number_list **list)
+void	swap_list(t_number_list **list)
 {
 	t_number_list	*tmp;
 
@@ -24,9 +24,9 @@ void	swap(t_number_list **list)
 	(*list)->next = tmp;
 }
 
-void	swap_with_print(t_stack *stack)
+void	swap(t_stack *stack)
 {
-	swap(&stack->list);
+	swap_list(&stack->list);
 	ft_dprintf(STDOUT_FILENO, "s%c\n", stack->name);
 }
 

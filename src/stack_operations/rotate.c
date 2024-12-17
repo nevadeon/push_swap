@@ -6,13 +6,13 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 13:53:55 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/14 21:45:12 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/17 09:00:39 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	rotate(t_number_list **list)
+void	rotate_list(t_number_list **list)
 {
 	t_number_list	*tmp;
 
@@ -24,7 +24,7 @@ void	rotate(t_number_list **list)
 	tmp->next = NULL;
 }
 
-void	reverse_rotate(t_number_list **list)
+void	reverse_rotate_list(t_number_list **list)
 {
 	t_number_list	*tmp;
 
@@ -36,19 +36,36 @@ void	reverse_rotate(t_number_list **list)
 	(*list)->next = tmp;
 }
 
-void	rotate_no_print(t_stack *stack, t_rotation direction)
+void	double_rotate(t_stack *a, t_stack *b, t_rotation direction)
 {
 	if (direction == ROTATE)
-		rotate(&stack->list);
+	{
+		rotate_list(&a->list);
+		rotate_list(&b->list);
+		ft_dprintf(STDOUT_FILENO, "rr\n");
+	}
+	else if (direction == REVERSE_ROTATE)
+	{
+		reverse_rotate_list(&a->list);
+		reverse_rotate_list(&b->list);
+		ft_dprintf(STDOUT_FILENO, "rrr\n");
+	}
 	else
-		reverse_rotate(&stack->list);
+		ft_error(ERROR_DIRECTION);
 }
 
-void	rotate_with_print(t_stack *stack, t_rotation direction)
+void	rotate(t_stack *stack, t_rotation direction)
 {
-	rotate_no_print(stack, direction);
 	if (direction == ROTATE)
+	{
+		rotate_list(&stack->list);
 		ft_dprintf(STDOUT_FILENO, "r%c\n", stack->name);
-	else
+	}
+	else if (direction == REVERSE_ROTATE)
+	{
+		reverse_rotate_list(&stack->list);
 		ft_dprintf(STDOUT_FILENO, "rr%c\n", stack->name);
+	}
+	else
+		ft_error(ERROR_DIRECTION);
 }

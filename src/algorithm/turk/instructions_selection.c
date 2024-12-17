@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:21:59 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/16 16:20:27 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/17 08:17:29 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	init_target(t_compare_function compare)
 		return (INT32_MAX);
 	else if (compare == is_descending)
 		return (INT32_MIN);
-	return (ft_error(ERR_COMPARE_FUNCTION), 0);
+	return (ft_error(ERROR_COMPARE_FUNCTION), 0);
 }
 
 int	find_target(int reference, t_stack *dest, t_compare_function compare)
@@ -77,7 +77,7 @@ t_rotation_instruction	rotation_instructions(
 	source_index = get_index(reference, src->list);
 	target_index = get_index(find_target(reference, dest, compare), dest->list);
 	if (source_index == -1 || target_index == -1)
-		ft_error(ERR_NO_NUMBER);
+		ft_error(ERROR_NO_NUMBER);
 	rc.source_rotate = source_index;
 	rc.source_rrotate = src->len - source_index;
 	rc.target_rotate = target_index;

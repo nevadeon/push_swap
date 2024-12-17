@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:48:44 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/16 16:03:38 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/17 08:28:44 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ const char	*get_error_message(t_error error_code)
 	static const char	*message[] = {\
 		[ERROR_CODE_MIN] = "The impossible happened", \
 		[ERROR] = "Error", \
-		[ERR_NO_NUMBER] = "No number match was found in the list", \
-		[ERR_COMPARE_FUNCTION] = "Unknown compare function", \
+		[ERROR_NO_NUMBER] = "No number match was found in the list", \
+		[ERROR_COMPARE_FUNCTION] = "Unknown compare function", \
+		[ERROR_DIRECTION] = "Rotate was called with unknown direction", \
 		[ERROR_CODE_MAX] = "Ft_error was called with out of bound index"
 	};
 

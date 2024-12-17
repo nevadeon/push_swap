@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   arg_check.c                                        :+:      :+:    :+:   */
+/*   arguments_checks.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 14:01:42 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/11 17:51:50 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/17 08:25:29 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	check_args(int argc, char *argv[])
 {
 	int	i;
 
+	if (argc == 1)
+		exit(EXIT_SUCCESS);
 	if (argc < 2 || (argc == 2 && argv[1][0] == '\0'))
 		ft_error(ERROR);
 	i = 1;
