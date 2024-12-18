@@ -3,32 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndavenne <github@noedavenne.aleaas.coms    +#+  +:+       +#+        */
+/*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 15:05:54 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/10/27 00:21:57 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/18 18:10:58 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libndav.h"
 
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+t_plist	*ft_lstmap(t_plist *list, void *(*fnc)(void *), void (*del)(void *))
 {
-	t_list	*cpy;
-	t_list	*node;
+	t_plist	*copy;
+	t_plist	*node;
 
-	cpy = NULL;
-	while (lst != NULL)
+	copy = NULL;
+	while (list != NULL)
 	{
 		node = ft_lstnew(NULL);
 		if (node == NULL)
 		{
-			ft_lstclear(&cpy, del);
+			ft_lstclear(&copy, del);
 			return (NULL);
 		}
-		node->content = f(lst->content);
-		ft_lstadd_back(&cpy, node);
-		lst = lst->next;
+		node->content = fnc(list->content);
+		ft_lstadd_back((t_list **)&copy, (t_list *)node);
+		list = list->next;
 	}
-	return (cpy);
+	return (copy);
 }

@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndavenne <github@noedavenne.aleaas.coms    +#+  +:+       +#+        */
+/*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 14:29:57 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/10/27 00:21:51 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/18 17:58:12 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libndav.h"
 
-void	ft_lstiter(t_list *lst, void (*f)(void *))
+void	ft_lstiter(t_plist *list, void (*fnc)(void *))
 {
-	if (f == NULL)
+	if (fnc == NULL)
 		return ;
-	while (lst != NULL)
+	while (list != NULL)
 	{
-		f(lst->content);
-		lst = lst->next;
+		fnc(list->content);
+		list = list->next;
 	}
 }

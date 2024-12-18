@@ -6,31 +6,33 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 14:03:28 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/15 01:30:25 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/18 19:54:28 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libndav.h"
 
-static t_list	*_lstnew(void *content)
+static t_arena_list	*_lstnew(void *block)
 {
-	t_list	*new_node;
+	t_arena_list	*new_node;
 
-	new_node = malloc(sizeof(t_list));
+	if (block == NULL)
+		return (NULL);
+	new_node = malloc(sizeof(t_arena_list));
 	if (new_node == NULL)
 		return (NULL);
-	new_node->content = content;
+	new_node->block = block;
 	new_node->next = NULL;
 	return (new_node);
 }
 
-static t_list	**_arena_head(void)
+static t_arena_list	**_get_arena_head(void)
 {
-	static t_list	*arena_head = NULL;
+	static t_arena_list	*head = NULL;
 
-	if (arena_head == NULL)
-		arena_head = _lstnew(malloc(ARENA_BLOCK_SIZE));
-	return (&arena_head);
+	if (head == NULL)
+		head = _lstnew(malloc(ARENA_BLOCK_SIZE));
+	return (&head);
 }
 
 static void	_del_block(void *block)
@@ -42,30 +44,31 @@ static void	_del_block(void *block)
 
 void	ft_free_arena(void)
 {
-	ft_lstclear(_arena_head(), _del_block);
+	ft_lstclear((t_plist **)_get_arena_head(), _del_block);
 }
 
 void	*ft_arena_alloc(size_t size)
 {
-	t_list			**arena;
-	size_t			block_size;
-	static size_t	pos = 0;
+	t_arena_list	**head;
+	static size_t	block_size = ARENA_BLOCK_SIZE;
+	static size_t	used_memory = 0;
 
-	arena = _arena_head();
-	if ((*arena) == NULL)
+	head = _get_arena_head();
+	if ((*head) == NULL)
 		return (NULL);
-	block_size = ARENA_BLOCK_SIZE;
-	if (pos + size > block_size)
+	if (used_memory + size > block_size)
 	{
+		if (block_size != ARENA_BLOCK_SIZE)
+			block_size = ARENA_BLOCK_SIZE;
 		while (size > block_size)
 			block_size *= 2;
-		ft_lstadd_front(arena, _lstnew(malloc(block_size)));
-		if ((*arena) == NULL)
+		ft_lstadd_front((t_list **)head, (t_list *)_lstnew(malloc(block_size)));
+		if ((*head) == NULL)
 			return (NULL);
-		pos = 0;
+		used_memory = 0;
 	}
-	pos += size;
-	return ((*arena)->content + pos - size);
+	used_memory += size;
+	return ((*head)->block + used_memory - size);
 }
 
 // void	*ft_block(size_t size)

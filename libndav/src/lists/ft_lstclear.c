@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndavenne <github@noedavenne.aleaas.coms    +#+  +:+       +#+        */
+/*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 12:39:33 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/10/27 00:15:03 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/18 17:59:49 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libndav.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+void	ft_lstclear(t_plist **list, void (*del)(void *))
 {
-	t_list	*node;
-	t_list	*temp;
+	t_plist	*node;
+	t_plist	*temp;
 
-	if (lst == NULL || del == NULL)
+	if (list == NULL || del == NULL)
 		return ;
-	node = *(lst);
+	node = *(list);
 	while (node != NULL)
 	{
 		del(node->content);
@@ -27,5 +27,5 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 		free(node);
 		node = temp;
 	}
-	*lst = NULL;
+	*list = NULL;
 }

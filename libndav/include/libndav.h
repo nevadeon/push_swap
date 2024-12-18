@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:24:54 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/10 10:37:15 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/18 19:36:14 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,28 @@
 # include <stdbool.h> //bool type
 # include <stdint.h> //integer types with fixed width
 
-typedef struct s_list
-{
-	struct s_list	*next;
-	void			*content;
-}	t_list;
-
 typedef unsigned char	t_byte;
 typedef unsigned int	t_uint;
 typedef unsigned long	t_ulong;
+
+typedef struct s_list
+{
+	struct s_list	*next;
+}	t_list;
+
+typedef struct s_pointer_list
+{
+	struct s_pointer_list	*next;
+	void			*content;
+}	t_pointer_list;
+
+typedef struct s_arena_list
+{
+	struct s_arena_list	*next;
+	t_byte				*block;
+}	t_arena_list;
+
+typedef t_pointer_list	t_plist;
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -63,15 +76,15 @@ size_t	ft_strclen(const char *str, char c, bool include_char);
 char	*ft_strcdup(const char *str, char c, bool include_char);
 void	ft_strccat(char *dest, const char *src, char c, bool include_char);
 
-t_list	*ft_lstnew(void *content);
+t_plist	*ft_lstnew(void *content);
 t_list	*ft_lstlast(t_list *lst);
 size_t	ft_lstsize(t_list *lst);
 void	ft_lstadd_front(t_list **lst, t_list *new_node);
 void	ft_lstadd_back(t_list **lst, t_list *new_node);
-void	ft_lstdelone(t_list *lst, void (*del)(void *));
-void	ft_lstclear(t_list **lst, void (*del)(void *));
-void	ft_lstiter(t_list *lst, void (*f)(void *));
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+void	ft_lstdelone(t_plist *lst, void (*del)(void *));
+void	ft_lstclear(t_plist **lst, void (*del)(void *));
+void	ft_lstiter(t_plist *lst, void (*f)(void *));
+t_plist	*ft_lstmap(t_plist *lst, void *(*f)(void *), void (*del)(void *));
 
 void	*ft_calloc(size_t nmemb, size_t size);
 void	ft_bzero(void *s, size_t n);
