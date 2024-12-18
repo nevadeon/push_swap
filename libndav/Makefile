@@ -13,7 +13,6 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@ar rcs $@ $(OBJ)
-	@printf "\n"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)

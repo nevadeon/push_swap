@@ -46,7 +46,6 @@ all: $(NAME)
 
 $(NAME): $(LIB_DIR)/$(LIB) $(OBJ)
 	@$(CC) $(CFLAGS) -o $@ $(OBJ) $(LDFLAGS)
-	@printf "\n"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)

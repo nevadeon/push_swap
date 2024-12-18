@@ -25,3 +25,7 @@ printf "%d%% [" $PERCENTAGE
 printf "%${FULL}s" | tr ' ' '#'
 printf "%${EMPTY}s" | tr ' ' '-'
 printf "\e[0m]"
+if [ $PERCENTAGE -eq 100 ]
+then
+    printf "\n"
+fi
