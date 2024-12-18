@@ -23,5 +23,5 @@ printf "\r\e[J$LEFT_TEXT"
 printf "%${SPACE}s"
 printf "%d%% [" $PERCENTAGE
 printf "%${FULL}s" | tr ' ' '#'
-printf "%${EMPTY}s" | tr ' ' '.'
+printf "%${EMPTY}s" | tr ' ' '-'
 printf "\e[0m]"
