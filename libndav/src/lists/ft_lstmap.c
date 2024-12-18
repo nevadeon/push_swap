@@ -6,16 +6,17 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 15:05:54 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/18 18:10:58 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/18 21:40:44 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libndav.h"
 
-t_plist	*ft_lstmap(t_plist *list, void *(*fnc)(void *), void (*del)(void *))
+t_pointer_list	*ft_lstmap(t_pointer_list *list,
+	t_transform_function convert, t_delete_function delete)
 {
-	t_plist	*copy;
-	t_plist	*node;
+	t_pointer_list	*copy;
+	t_pointer_list	*node;
 
 	copy = NULL;
 	while (list != NULL)
@@ -23,10 +24,10 @@ t_plist	*ft_lstmap(t_plist *list, void *(*fnc)(void *), void (*del)(void *))
 		node = ft_lstnew(NULL);
 		if (node == NULL)
 		{
-			ft_lstclear(&copy, del);
+			ft_lstclear(&copy, delete);
 			return (NULL);
 		}
-		node->content = fnc(list->content);
+		node->content = convert(list->content);
 		ft_lstadd_back((t_list **)&copy, (t_list *)node);
 		list = list->next;
 	}

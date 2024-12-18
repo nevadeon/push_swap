@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 14:03:28 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/18 19:54:28 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/18 21:31:24 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	_del_block(void *block)
 
 void	ft_free_arena(void)
 {
-	ft_lstclear((t_plist **)_get_arena_head(), _del_block);
+	ft_lstclear((t_pointer_list **)_get_arena_head(), _del_block);
 }
 
 void	*ft_arena_alloc(size_t size)

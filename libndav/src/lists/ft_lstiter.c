@@ -6,19 +6,19 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 14:29:57 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/18 17:58:12 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/18 21:42:14 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libndav.h"
 
-void	ft_lstiter(t_plist *list, void (*fnc)(void *))
+void	ft_lstiter(t_pointer_list *list, t_apply_function apply)
 {
-	if (fnc == NULL)
+	if (apply == NULL)
 		return ;
 	while (list != NULL)
 	{
-		fnc(list->content);
+		apply(list->content);
 		list = list->next;
 	}
 }
