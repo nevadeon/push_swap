@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 21:04:13 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/18 21:42:00 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/18 21:51:47 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ typedef struct s_pointer_list
 	void					*content;
 }	t_pointer_list;
 
-typedef void (*t_delete_function)(void *);
-typedef void *(*t_transform_function)(void *);
-typedef void (*t_apply_function)(void *);
+typedef void	(*t_delete_function)(void *);
+typedef void	*(*t_transform_function)(void *);
+typedef void	(*t_apply_function)(void *);
 
 t_pointer_list	*ft_lstnew(void *content);
 t_list			*ft_lstlast(t_list *lst);
