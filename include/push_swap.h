@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:46:46 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/17 13:05:43 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/18 20:45:50 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 # define PUSH_SWAP_H
 
 # include <stdbool.h>
-# include <stdio.h>
+# include <limits.h>
 # include "libndav.h"
-
-# define ASCENDING_ORDER 1
 
 typedef enum e_error
 {

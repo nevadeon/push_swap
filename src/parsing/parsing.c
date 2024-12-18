@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:26:16 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/13 17:32:26 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/18 20:43:32 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ void	init_stacks(int argc, char *argv[], t_stack *a, t_stack *b)
 		.list = NULL,
 		.name = 'b',
 		.len = 0,
-		.max = INT32_MIN,
-		.min = INT32_MAX
+		.max = INT_MIN,
+		.min = INT_MAX
 	};
 }
 

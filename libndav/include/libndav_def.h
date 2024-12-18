@@ -1,29 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libndav.h                                          :+:      :+:    :+:   */
+/*   libndav_def.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/12 19:24:54 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/18 21:22:51 by ndavenne         ###   ########.fr       */
+/*   Created: 2024/12/18 21:15:15 by ndavenne          #+#    #+#             */
+/*   Updated: 2024/12/18 21:17:26 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBNDAV_H
-# define LIBNDAV_H
+#ifndef LIBNDAV_DEF_H
+# define LIBNDAV_DEF_H
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdarg.h>
-# include <stdbool.h>
-# include <stddef.h>
-
-# include "libndav_def.h"
-# include "libndav_char.h"
-# include "libndav_io.h"
-# include "libndav_lists.h"
-# include "libndav_memory.h"
-# include "libndav_strings.h"
+typedef unsigned long	t_ulong;
+typedef unsigned int	t_uint;
+typedef unsigned char	t_byte;
 
 #endif

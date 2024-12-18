@@ -5,6 +5,7 @@ then
     echo "Usage: $0 LEFT_TEXT CURRENT TOTAL" >&2
 fi
 LEFT_TEXT=$1
+
 CURRENT=$(find obj -type f | wc -l)
 TOTAL=$(find src -type f | wc -l)
 PERCENTAGE=$(bc <<< "scale=0; 100 * $CURRENT / $TOTAL")

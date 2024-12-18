@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:21:59 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/17 08:17:29 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/18 20:44:43 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 int	init_target(t_compare_function compare)
 {
 	if (compare == is_ascending)
-		return (INT32_MAX);
+		return (INT_MAX);
 	else if (compare == is_descending)
-		return (INT32_MIN);
+		return (INT_MIN);
 	return (ft_error(ERROR_COMPARE_FUNCTION), 0);
 }
 
@@ -97,7 +97,7 @@ t_rotation_instruction	find_best_instructions(t_stack *src, t_stack *dest,
 	t_rotation_instruction	cheapest;
 
 	list = src->list;
-	cheapest = (t_rotation_instruction){.total_cost = INT32_MAX};
+	cheapest = (t_rotation_instruction){.total_cost = INT_MAX};
 	while (list != NULL)
 	{
 		current = rotation_instructions(list->number, src, dest, compare);

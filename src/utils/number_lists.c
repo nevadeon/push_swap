@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:25:50 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/12/15 18:12:48 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/12/18 20:44:43 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	find_max(t_number_list *list)
 {
 	int	max;
 
-	max = INT32_MIN;
+	max = INT_MIN;
 	while (list != NULL)
 	{
 		if (list->number > max)
@@ -30,7 +30,7 @@ int	find_min(t_number_list *list)
 {
 	int	min;
 
-	min = INT32_MAX;
+	min = INT_MAX;
 	while (list != NULL)
 	{
 		if (list->number < min)

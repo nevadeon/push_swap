@@ -18,6 +18,9 @@
 		"unordered_map": "c",
 		"vector": "c",
 		"algorithm": "c",
-		"chrono": "c"
+		"chrono": "c",
+		"stdint.h": "c",
+		"stdarg.h": "c",
+		"libndav_char.h": "c"
 	}
 }
