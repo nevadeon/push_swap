@@ -1,0 +1,3 @@
+[submodule "libndav"]
+	path = libndav
+	url = git@github.com:nevadeon/libndav.git
