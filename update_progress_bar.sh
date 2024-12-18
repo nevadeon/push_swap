@@ -21,7 +21,7 @@ EMPTY=$(($BAR_LEN - $FULL))
 
 printf "\r\e[J$LEFT_TEXT"
 printf "%${SPACE}s"
-printf "%d%% [\e[38;2;163;255;149;1m" $PERCENTAGE
+printf "%d%% [" $PERCENTAGE
 printf "%${FULL}s" | tr ' ' '#'
 printf "%${EMPTY}s" | tr ' ' '.'
 printf "\e[0m]"
