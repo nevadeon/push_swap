@@ -39,64 +39,21 @@ GDB_FLAGS := --quiet --args
 TEST_ARGS := 99 0 25 -38 10 7 42
 
 # ============================================================================ #
-#        ANSI color codes                                                      #
-# ============================================================================ #
-
-GREEN := \033[0;32m
-YELLOW := \033[0;33m
-
-RESET_COLOR := \033[0m
-CLEAR_LINE := \033[2K\r
-TERM_UP := \033[1A
-
-# ============================================================================ #
-#         Progress bar                                                         #
-# ============================================================================ #
-
-TOTAL_FILES := $(words $(OBJ))
-
-define update_progress_bar
-	@if [ ! -f .compiled_count ]; then \
-		echo 0 > .compiled_count; \
-		printf "\n"; \
-	fi; \
-	COMPILED_COUNT=$$(cat .compiled_count); \
-	COMPILED_COUNT=$$((COMPILED_COUNT + 1)); \
-	echo $$COMPILED_COUNT > .compiled_count; \
-	PROGRESS=$$((COMPILED_COUNT * 100 / $(TOTAL_FILES))); \
-	BAR_LENGTH=40; \
-	FILLED=$$((PROGRESS * BAR_LENGTH / 100)); \
-	EMPTY=$$((BAR_LENGTH - FILLED)); \
-	BAR=$$(printf "%0.s#" $$(seq 1 $$FILLED)); \
-	EMPTY_BAR=$$(printf "%0.s-" $$(seq 1 $$EMPTY)); \
-	if [ $$EMPTY -eq 0 ]; then \
-		EMPTY_BAR=""; \
-	fi; \
-	LEFT_TEXT="Compiling $(NAME)..."; \
-	LEFT_TEXT_LENGTH=$$(echo -n $$LEFT_TEXT | wc -m); \
-	TERMINAL_SIZE=$$(tput cols); \
-	SPACE_NUMBER=$$((TERMINAL_SIZE - LEFT_TEXT_LENGTH - BAR_LENGTH - 2)); \
-	SPACES=$$(printf "%0.s " $$(seq 1 $$SPACE_NUMBER)); \
-	printf "$(TERM_UP)$(YELLOW)$$LEFT_TEXT$(RESET_COLOR)$$SPACES[$$BAR$$EMPTY_BAR]\n";
-endef
-
-# ============================================================================ #
 #        Main rules                                                            #
 # ============================================================================ #
 
 all: $(NAME)
-	@rm -f .compiled_count
 
 $(NAME): $(LIB_DIR)/$(LIB) $(OBJ)
 	@$(CC) $(CFLAGS) -o $@ $(OBJ) $(LDFLAGS)
-	@printf "$(GREEN)✔ $(NAME) created.\n$(RESET_COLOR)"
+	@printf "\n"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -o $@ -c $<
-	@$(call update_progress_bar)
+	@./update_progress_bar.sh "Compiling $(NAME):"
 
-re: fclean all
+re: libre fclean all
 
 clean:
 	@rm -rf $(OBJ_DIR)
@@ -111,8 +68,8 @@ fclean: clean
 $(LIB_DIR)/$(LIB):
 	@$(MAKE) -s -C $(LIB_DIR)
 
-lclean:
-	@$(MAKE) -s -C $(LIB_DIR) fclean
+libre:
+	@$(MAKE) -s -C $(LIB_DIR) re
 
 # ============================================================================ #
 #        Test rules                                                            #
